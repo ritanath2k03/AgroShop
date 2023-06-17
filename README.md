@@ -1,2 +1,0 @@
-# TechFest2K23
-
