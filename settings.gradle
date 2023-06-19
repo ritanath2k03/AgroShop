@@ -11,7 +11,7 @@
         google()
         mavenCentral()
     }
-
+//this is done by Rith
  }
 rootProject.name = "AgroShop"
 include ':app'
