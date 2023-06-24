@@ -210,6 +210,7 @@ else {
     }
 
     private void createAccount() {
+
         progressDialog=new ProgressDialog(SignupActivity.this);
         progressDialog.setTitle("Just a moment....");
         progressDialog.setMessage("We are Creating Your Account");
@@ -219,7 +220,7 @@ else {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-
+//signinmap is a hashmap which store string and object pair
                         signinmap.put(FarmersModel.KEY_EMAIL,activitySignupBinding.Email.getText().toString());
                         signinmap.put(FarmersModel.KEY_PAASSWORD,activitySignupBinding.Password.getText().toString());
                         signinmap.put(FarmersModel.KEY_PHONE_NUMBER,activitySignupBinding.Phone.getText().toString());
@@ -238,14 +239,16 @@ signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
                                     preferanceManager.putString(FarmersModel.KEY_FNAME,activitySignupBinding.Name.getText().toString());
                                     preferanceManager.putString(FarmersModel.KEY_CNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_DNAME,null);
-                                } else if (((TextView) adapterView.getChildAt(0)).getText().toString()=="Carrier") {
+                                }
+                                else if (((TextView) adapterView.getChildAt(0)).getText().toString()=="Carrier") {
                                     signinmap.put(FarmersModel.KEY_CNAME,activitySignupBinding.Name.getText().toString());
                                     signinmap.put(FarmersModel.KEY_FNAME,null);
                                     signinmap.put(FarmersModel.KEY_DNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_FNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_DNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_CNAME,activitySignupBinding.Name.getText().toString());
-                                } else if (((TextView) adapterView.getChildAt(0)).getText().toString()=="Distributor") {
+                                }
+                                else if (((TextView) adapterView.getChildAt(0)).getText().toString()=="Distributor") {
                                     signinmap.put(FarmersModel.KEY_DNAME,activitySignupBinding.Name.getText().toString());
                                     signinmap.put(FarmersModel.KEY_CNAME,null);
                                     signinmap.put(FarmersModel.KEY_FNAME,null);
@@ -300,7 +303,7 @@ uri=picture.getPictureUri();
 
                            preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
                            preferanceManager.putString(FarmersModel.KEY_USERID,documentReference.getId());
-    preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,uri);
+                           preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,uri);
 
 
                            Toast.makeText(SignupActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
