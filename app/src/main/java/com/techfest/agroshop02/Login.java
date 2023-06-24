@@ -59,16 +59,14 @@ ActivityLoginBinding activityLoginBinding;
         }
 
 
-
-
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
         gsc= GoogleSignIn.getClient(getApplicationContext(),gso);
-//if(auth.getUid()!=null){
-//    Toast.makeText(this, "New Actiivity", Toast.LENGTH_SHORT).show();
-//
-//}
+if(auth.getUid()!=null){
+
+
+}
         activityLoginBinding.GoogleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,38 +170,116 @@ if(task.isSuccessful()){
                         progressDialog.dismiss();
                       if(task.isSuccessful()&& task.getResult()!=null){
 
-                          FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-                          firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER)
-                                  .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
-                                          .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
-                                                  .get()
-                                                          .addOnCompleteListener(task1 -> {
-if(task1.isSuccessful()&&task1.getResult().getDocuments().size()>0){
-
-    DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
-    preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
-    preferanceManager.putString(FarmersModel.KEY_USERID,documentSnapshot.getId());
-   if(documentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
-       preferanceManager.putString(FarmersModel.KEY_FNAME,documentSnapshot.getString(FarmersModel.KEY_FNAME));
-   }else if(documentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
-       preferanceManager.putString(FarmersModel.KEY_CNAME,documentSnapshot.getString(FarmersModel.KEY_CNAME));
-   } else if (documentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
-       preferanceManager.putString(FarmersModel.KEY_DNAME,documentSnapshot.getString(FarmersModel.KEY_DNAME));
-   }
-   preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
-   Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-   startActivity(intent);
-}
-else{
-    Toast.makeText(Login.this, "Unable to Signin", Toast.LENGTH_SHORT).show();
-}
 
 
-                                                          });
+             //             Toast.makeText(Login.this,preferanceManager.getString (FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
+                if(FarmersModel.KEY_FNAME!=null){
+                    FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+
+                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document("Farmer")
+                            .collection(auth.getUid()).document("Profile").collection("Attribute")
+                            .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
+                            .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
+                            .get()
+                            .addOnCompleteListener(task1 -> {
+                                if(task1.isSuccessful()&&task1.getResult().getDocuments().size()>0){
+
+                                    DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
+                                    preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
+                                    preferanceManager.putString(FarmersModel.KEY_USERID,documentSnapshot.getId());
+                                    if(documentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_FNAME,documentSnapshot.getString(FarmersModel.KEY_FNAME));
+                                    }else if(documentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_CNAME,documentSnapshot.getString(FarmersModel.KEY_CNAME));
+                                    } else if (documentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_DNAME,documentSnapshot.getString(FarmersModel.KEY_DNAME));
+                                    }
+                                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
+
+                                    preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
+                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
 
 
-                          Toast.makeText(Login.this, "Enter new activity", Toast.LENGTH_SHORT).show();
+
+                            });
+                }
+               if (FarmersModel.KEY_CNAME!=null){
+                    FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+
+                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document("Carrier")
+                            .collection(auth.getUid()).document("Profile").collection("Attribute")
+                            .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
+                            .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
+                            .get()
+                            .addOnCompleteListener(task1 -> {
+                                if(task1.isSuccessful()&&task1.getResult().getDocuments().size()>0){
+
+                                    DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
+                                    preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
+                                    preferanceManager.putString(FarmersModel.KEY_USERID,documentSnapshot.getId());
+                                    if(documentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_FNAME,documentSnapshot.getString(FarmersModel.KEY_FNAME));
+                                    }else if(documentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_CNAME,documentSnapshot.getString(FarmersModel.KEY_CNAME));
+                                    } else if (documentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_DNAME,documentSnapshot.getString(FarmersModel.KEY_DNAME));
+                                    }
+                                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
+
+                                    preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
+                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+
+
+
+                            });
+                }
+              if(FarmersModel.KEY_DNAME!=null){
+                    FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+
+                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document("Distributor")
+                            .collection(auth.getUid()).document("Profile").collection("Attribute")
+                            .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
+                            .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
+                            .get()
+                            .addOnCompleteListener(task1 -> {
+                                if(task1.isSuccessful()&&task1.getResult().getDocuments().size()>0){
+
+                                    DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
+                                    preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
+                                    preferanceManager.putString(FarmersModel.KEY_USERID,documentSnapshot.getId());
+                                    if(documentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_FNAME,documentSnapshot.getString(FarmersModel.KEY_FNAME));
+                                    }else if(documentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_CNAME,documentSnapshot.getString(FarmersModel.KEY_CNAME));
+                                    } else if (documentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
+                                        preferanceManager.putString(FarmersModel.KEY_DNAME,documentSnapshot.getString(FarmersModel.KEY_DNAME));
+                                    }
+                                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
+
+                                    preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
+                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+
+
+                            });
+                }
+                if(FarmersModel.KEY_DNAME==null&&FarmersModel.KEY_FNAME==null&&FarmersModel.KEY_CNAME==null){
+                    Toast.makeText(Login.this, "Unable to Signin", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+
+
                       }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

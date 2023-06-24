@@ -38,6 +38,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -88,10 +91,19 @@ preferanceManager=new PreferanceManager(getApplicationContext());
                 signinmap.put(FarmersModel.KEY_DESIGNATION, ((TextView) adapterView.getChildAt(0)).getText().toString());
                 if(((TextView) adapterView.getChildAt(0)).getText().toString().matches("Farmer")){
                     signinmap.put(FarmersModel.KEY_FNAME,activitySignupBinding.Name.getText().toString());
+                    signinmap.put(FarmersModel.KEY_CNAME,null);
+                    signinmap.put(FarmersModel.KEY_DNAME,null);
+                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Farmer");
                 } else if (((TextView) adapterView.getChildAt(0)).getText().toString().matches("Carrier")) {
                     signinmap.put(FarmersModel.KEY_CNAME,activitySignupBinding.Name.getText().toString());
+                    signinmap.put(FarmersModel.KEY_FNAME,null);
+                    signinmap.put(FarmersModel.KEY_DNAME,null);
+                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Carrier");
                 } else if (((TextView) adapterView.getChildAt(0)).getText().toString().matches("Distributor")) {
                     signinmap.put(FarmersModel.KEY_DNAME,activitySignupBinding.Name.getText().toString());
+                    signinmap.put(FarmersModel.KEY_CNAME,null);
+                    signinmap.put(FarmersModel.KEY_FNAME,null);
+                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Distributor");
                 }
                 else {
                     Toast.makeText(SignupActivity.this, "Choose correct one ", Toast.LENGTH_SHORT).show();
@@ -162,7 +174,7 @@ preferanceManager=new PreferanceManager(getApplicationContext());
  activitySignupBinding.gotologinActivity.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View view) {
-         startActivity(new Intent(SignupActivity.this, Login.class));
+         Toast.makeText(SignupActivity.this, "Now Login with Credentials", Toast.LENGTH_SHORT).show();
 
      }
  });
@@ -225,6 +237,7 @@ else {
                         signinmap.put(FarmersModel.KEY_PAASSWORD,activitySignupBinding.Password.getText().toString());
                         signinmap.put(FarmersModel.KEY_PHONE_NUMBER,activitySignupBinding.Phone.getText().toString());
 signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
+                        final int[] selector = {0};
                         activitySignupBinding.spinnerLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -235,7 +248,8 @@ signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
                                     signinmap.put(FarmersModel.KEY_FNAME,activitySignupBinding.Name.getText().toString());
                                     signinmap.put(FarmersModel.KEY_CNAME,null);
                                     signinmap.put(FarmersModel.KEY_DNAME,null);
-
+selector[0] =1;
+preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Farmer");
                                     preferanceManager.putString(FarmersModel.KEY_FNAME,activitySignupBinding.Name.getText().toString());
                                     preferanceManager.putString(FarmersModel.KEY_CNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_DNAME,null);
@@ -244,6 +258,8 @@ signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
                                     signinmap.put(FarmersModel.KEY_CNAME,activitySignupBinding.Name.getText().toString());
                                     signinmap.put(FarmersModel.KEY_FNAME,null);
                                     signinmap.put(FarmersModel.KEY_DNAME,null);
+                                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Carrier");
+                                    selector[0] =2;
                                     preferanceManager.putString(FarmersModel.KEY_FNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_DNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_CNAME,activitySignupBinding.Name.getText().toString());
@@ -252,6 +268,8 @@ signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
                                     signinmap.put(FarmersModel.KEY_DNAME,activitySignupBinding.Name.getText().toString());
                                     signinmap.put(FarmersModel.KEY_CNAME,null);
                                     signinmap.put(FarmersModel.KEY_FNAME,null);
+                                    selector[0] =3;
+                                    preferanceManager.putString(FarmersModel.KEY_DESIGNATION,"Distributor");
                                     preferanceManager.putString(FarmersModel.KEY_CNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_FNAME,null);
                                     preferanceManager.putString(FarmersModel.KEY_DNAME,activitySignupBinding.Name.getText().toString());
@@ -269,26 +287,29 @@ activitySignupBinding.spinnerLanguages.setPrompt("Required");
                         });
 
                    if (task.isSuccessful()){
-                       databaseReference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
-                           @Override
-                           public void onDataChange(@NonNull DataSnapshot snapshot) {
-                               FarmersModel picture=snapshot.getValue(FarmersModel.class);
+                       Toast.makeText(SignupActivity.this, preferanceManager.getString(FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
+//                       databaseReference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+//                           @Override
+//                           public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                               FarmersModel picture=snapshot.getValue(FarmersModel.class);
+//
+////uri=picture.getPictureUri();
+////                               Picasso.get().load(String.valueOf(picture.getPictureUri())).into(activitySignupBinding.profileImage);
+//                           }
+//
+//                           @Override
+//                           public void onCancelled(@NonNull DatabaseError error) {
+//
+//                           }
+//                       });
 
-uri=picture.getPictureUri();
-                               Picasso.get().load(String.valueOf(picture.getPictureUri())).into(activitySignupBinding.profileImage);
-                           }
-
-                           @Override
-                           public void onCancelled(@NonNull DatabaseError error) {
-
-                           }
-                       });
+                       FirebaseFirestore firestore= FirebaseFirestore.getInstance();
 
 
-                       databaseReference.child(auth.getUid()).setValue(signinmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       databaseReference.child(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).child(auth.getUid()).setValue(signinmap).addOnCompleteListener(new OnCompleteListener<Void>() {
                            @Override
                            public void onComplete(@NonNull Task<Void> task) {
-                               Toast.makeText(SignupActivity.this, "New Activity", Toast.LENGTH_SHORT).show();
+
                                activitySignupBinding.Name.setText("");
                                activitySignupBinding.Email.setText("");
                                activitySignupBinding.Password.setText("");
@@ -298,21 +319,37 @@ uri=picture.getPictureUri();
 
                            }
                        });
-                       FirebaseFirestore firestore= FirebaseFirestore.getInstance();
-                       firestore.collection(FarmersModel.KEY_COLLECTION_USER).add(signinmap).addOnSuccessListener(documentReference -> {
 
-                           preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
-                           preferanceManager.putString(FarmersModel.KEY_USERID,documentReference.getId());
-                           preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,uri);
+
+                       firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute").add(signinmap).addOnSuccessListener(documentReference -> {
+                           firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute")
+                                           .get()
+                                                   .addOnCompleteListener(task1 -> {
+                                                       DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
+                                                       preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);
+                                                       preferanceManager.putString(FarmersModel.KEY_USERID,documentReference.getId());
+                                                       preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,uri);
+                                                       if(documentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
+                                                           preferanceManager.putString(FarmersModel.KEY_FNAME,documentSnapshot.getString(FarmersModel.KEY_FNAME));
+                                                       }else if(documentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
+                                                           preferanceManager.putString(FarmersModel.KEY_CNAME,documentSnapshot.getString(FarmersModel.KEY_CNAME));
+                                                       } else if (documentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
+                                                           preferanceManager.putString(FarmersModel.KEY_DNAME,documentSnapshot.getString(FarmersModel.KEY_DNAME));
+                                                       }
+                                                       preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
+
+                                                       preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
+                                                   });
 
 
                            Toast.makeText(SignupActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
-                           Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                           Intent intent=new Intent(getApplicationContext(),Login.class);
                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                            startActivity(intent);
                        });
 
                    }
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

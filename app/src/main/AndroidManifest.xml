@@ -20,6 +20,9 @@
             android:name=".chatActivity"
             android:exported="false" />
         <activity
+            android:name=".UserActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="true"
             android:theme="@style/Base.Theme.AgroShopLogin">
