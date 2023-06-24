@@ -2,6 +2,7 @@ package com.techfest.agroshop02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.techfest.agroshop02.databinding.ActivityMainBinding;
 
 import Models.FarmersModel;
@@ -24,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         preferanceManager=new PreferanceManager(getApplicationContext());
         loadUserDetails();
-
+getToken();
+setListerner();
+    }
+    private  void setListerner(){
+        binding.TextView.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(),UserActivity.class));});
+        
     }
     private  void loadUserDetails(){
         if(preferanceManager.getString(FarmersModel.KEY_FNAME)!=null)
@@ -42,5 +49,8 @@ public class MainActivity extends AppCompatActivity {
         documentReference.update(FarmersModel.KEY_FCM,token)
                 .addOnSuccessListener(unused -> Toast.makeText(this, "Token Updated Successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(this, "Unable to Update Token", Toast.LENGTH_SHORT).show());
+    }
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this:: updateToken);
     }
 }
