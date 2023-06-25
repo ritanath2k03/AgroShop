@@ -58,6 +58,7 @@ if(getItemViewType(position)==VIEW_TYPE_SENT){
     @Override
     public int getItemViewType(int position) {
         if(chatMassages.get(position).senderId.equals(senderId)){
+
             return VIEW_TYPE_SENT;
         }
         else {
