@@ -17,6 +17,15 @@ public class FarmersModel {
 
    public  static final String KEY_DESIGNATION="Designation";
    public  static final String KEY_FCM="fcmToken";
+   public  static final String KEY_USER="EachUser";
+   public  static final String KEY_COLLECTION_CHAT="chat";
+   public  static final String KEY_SENDER_ID="senderId";
+   public  static final String KEY_RECEIVER_ID="receiverId";
+   public  static final String KEY_MASSAGE="massage";
+   public  static final String KEY_TIMESTAMP="timestamp";
+
+
+
 
 
 

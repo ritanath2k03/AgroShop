@@ -6,17 +6,27 @@
     android:layout_height="wrap_content"
     android:padding="4dp">
 
+    <ImageView
+        android:id="@+id/chatprofileImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/receiveMassage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:background="@drawable/background_receive_massage"
         android:padding="12dp"
         android:text="Hi everyone "
+
         android:textColor="@color/white"
         android:textSize="13dp"
-
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chatprofileImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 

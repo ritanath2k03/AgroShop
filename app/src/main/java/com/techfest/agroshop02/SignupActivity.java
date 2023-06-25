@@ -321,7 +321,9 @@ activitySignupBinding.spinnerLanguages.setPrompt("Required");
                        });
 
 
-                       firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute").add(signinmap).addOnSuccessListener(documentReference -> {
+                       firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid())
+                               .document("Profile").collection("Attribute")
+                               .add(signinmap).addOnSuccessListener(documentReference -> {
                            firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute")
                                            .get()
                                                    .addOnCompleteListener(task1 -> {

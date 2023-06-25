@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.techfest.agroshop02.databinding.ItemContainerUserBinding;
+import com.techfest.agroshop02.listeners.UserListeners;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ import Models.User;
 public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
 
     private  final List<User> users;
+    private  final UserListeners userListeners;
 
-    public UsersAdapter(List<User> users) {
+    public UsersAdapter(List<User> users,UserListeners userListeners) {
         this.users = users;
+        this.userListeners=userListeners;
     }
 
     @NonNull
@@ -59,6 +62,7 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.UserViewHol
             binding.textEmail.setText(user.email);
             binding.textUri.setText(user.image);
             Picasso.get().load(user.image).into(binding.imageProfile);
+            binding.getRoot().setOnClickListener(v -> userListeners.onUserClicked(user) );
         }
     }
 
