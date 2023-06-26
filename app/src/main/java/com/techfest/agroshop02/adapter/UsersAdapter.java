@@ -60,7 +60,8 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.UserViewHol
         void setUserData(User user){
             binding.textName.setText(user.name);
             binding.textEmail.setText(user.email);
-            binding.textUri.setText(user.image);
+            binding.PhoneNumber.setText(user.phone);
+            binding.textDesignation.setText(user.designation);
             Picasso.get().load(user.image).into(binding.imageProfile);
             binding.getRoot().setOnClickListener(v -> userListeners.onUserClicked(user) );
         }

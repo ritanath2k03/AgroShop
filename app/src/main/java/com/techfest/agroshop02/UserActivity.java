@@ -46,8 +46,8 @@ getUsers();
     private  void getUsers(){
         loading(true);
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-        Toast.makeText(this, preferanceManager.getString(FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
-        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute").get()
+//        Toast.makeText(this, preferanceManager.getString(FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
+        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).get()
                 .addOnCompleteListener(task -> {
                     loading(false);
                     String currentUser =preferanceManager.getString(FarmersModel.KEY_USERID);
@@ -56,9 +56,9 @@ getUsers();
                         for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
 
                             //for skipping the current user
-//                            if(currentUser.equals((queryDocumentSnapshot.getId()))){
-//                                continue;
-//                            }
+                            if(currentUser.equals((queryDocumentSnapshot.getId()))){
+                                continue;
+                            }
                             User user=new User();
                            if(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
                                user.name=queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME);
@@ -72,6 +72,8 @@ getUsers();
                            user.email=queryDocumentSnapshot.getString(FarmersModel.KEY_EMAIL);
                            user.image=queryDocumentSnapshot.getString(FarmersModel.KEY_PICTURE_URI);
                            user.id=queryDocumentSnapshot.getId();
+                           user.phone=queryDocumentSnapshot.getString(FarmersModel.KEY_PHONE_NUMBER);
+                           user.designation=queryDocumentSnapshot.getString(FarmersModel.KEY_DESIGNATION);
                            user.token=queryDocumentSnapshot.getString(FarmersModel.KEY_FCM);
                            users.add(user);
                         }
@@ -80,18 +82,18 @@ getUsers();
                             activityUserBinding.UsersRecyclerView.setAdapter(usersAdapter);
                             activityUserBinding.UsersRecyclerView.setVisibility(View.VISIBLE);
                         }else{
-                            showErrorMassage();
+                            showErrormessage();
                         }
                     }
                     else {
-                        showErrorMassage();
+                        showErrormessage();
                     }
                 });
     }
 
-private void showErrorMassage(){
-        activityUserBinding.textErrorMassage.setText(String.format("%s","No User available"));
-        activityUserBinding.textErrorMassage.setVisibility(View.VISIBLE);
+private void showErrormessage(){
+        activityUserBinding.textErrormessage.setText(String.format("%s","No User available"));
+        activityUserBinding.textErrormessage.setVisibility(View.VISIBLE);
     }
     private  void loading(Boolean isLoading){
         if(isLoading){

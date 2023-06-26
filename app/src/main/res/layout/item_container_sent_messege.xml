@@ -8,11 +8,10 @@
     android:padding="4dp">
 
     <TextView
-        android:id="@+id/sentMassage"
+        android:id="@+id/sentmessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_sent_massage"
-
+        android:background="@drawable/background_sent_massege"
         android:text="Hi everyone "
         android:textColor="@color/white"
         android:layout_marginTop="4dp"
@@ -37,6 +36,6 @@
         android:textColor="#787272"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/sentMassage"
-        app:layout_constraintTop_toBottomOf="@+id/sentMassage" />
+        app:layout_constraintEnd_toEndOf="@+id/sentmessage"
+        app:layout_constraintTop_toBottomOf="@+id/sentmessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

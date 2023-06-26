@@ -322,11 +322,9 @@ activitySignupBinding.spinnerLanguages.setPrompt("Required");
                        });
 
 
-                       firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid())
-                               .document("Profile").collection("Attribute")
+                       firestore.collection(FarmersModel.KEY_COLLECTION_USER)
                                .add(signinmap).addOnSuccessListener(documentReference -> {
-                           firestore.collection(FarmersModel.KEY_COLLECTION_USER).document(preferanceManager.getString(FarmersModel.KEY_DESIGNATION)).collection(auth.getUid()).document("Profile").collection("Attribute")
-                                           .get()
+                           firestore.collection(FarmersModel.KEY_COLLECTION_USER).get()
                                                    .addOnCompleteListener(task1 -> {
                                                        DocumentSnapshot documentSnapshot=task1.getResult().getDocuments().get(0);
                                                        preferanceManager.putBoolean(FarmersModel.KEY_IS_SIGNED_IN,true);

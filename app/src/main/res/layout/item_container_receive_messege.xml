@@ -18,11 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/receiveMassage"
+        android:id="@+id/receivemessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:background="@drawable/background_receive_massage"
+        android:background="@drawable/background_receive_massege"
         android:layout_marginTop="4dp"
        android:paddingBottom="8dp"
         android:paddingTop="8dp"
@@ -48,6 +48,6 @@
         android:textColor="#3F51B5"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/receiveMassage"
-        app:layout_constraintTop_toBottomOf="@+id/receiveMassage" />
+        app:layout_constraintEnd_toEndOf="@+id/receivemessage"
+        app:layout_constraintTop_toBottomOf="@+id/receivemessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,23 +8,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.techfest.agroshop02.databinding.ItemContainerReceiveMassageBinding;
-import com.techfest.agroshop02.databinding.ItemContainerSentMassageBinding;
+import com.techfest.agroshop02.databinding.ItemContainerReceiveMessegeBinding;
+import com.techfest.agroshop02.databinding.ItemContainerSentMessegeBinding;
+
 
 import java.util.List;
+import java.util.zip.Inflater;
 
-import Models.ChatMassage;
+import Models.ChatMessage;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
- private final    List<ChatMassage> chatMassages;
+ private final    List<ChatMessage> ChatMessages;
  private final String senderId;
  private final String receiverProfileImage;
 
  public static final int VIEW_TYPE_SENT=1;
  public static final int VIEW_TYPE_RECEIVE=2;
 
-    public ChatAdapter(List<ChatMassage> chatMassages, String senderId, String receiverProfileImage) {
-        this.chatMassages = chatMassages;
+    public ChatAdapter(List<ChatMessage> ChatMessages, String senderId, String receiverProfileImage) {
+        this.ChatMessages = ChatMessages;
         this.senderId = senderId;
         this.receiverProfileImage = receiverProfileImage;
     }
@@ -33,10 +35,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 if(viewType==VIEW_TYPE_SENT){
-    return  new SentMassageViewHolder(ItemContainerSentMassageBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+
+    return  new SentmessageViewHolder(ItemContainerSentMessegeBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
 
 }else{
-    return new ReceivedMassageViewHolder(ItemContainerReceiveMassageBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+    return new ReceivedmessageViewHolder(ItemContainerReceiveMessegeBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
 }
 
 }
@@ -44,20 +47,20 @@ if(viewType==VIEW_TYPE_SENT){
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 if(getItemViewType(position)==VIEW_TYPE_SENT){
-    ((SentMassageViewHolder) holder).setData(chatMassages.get(position));
+    ((SentmessageViewHolder) holder).setData(ChatMessages.get(position));
 }else{
-    ((ReceivedMassageViewHolder)holder).setData(chatMassages.get(position),receiverProfileImage);
+    ((ReceivedmessageViewHolder)holder).setData(ChatMessages.get(position),receiverProfileImage);
 }
     }
 
     @Override
     public int getItemCount() {
-        return chatMassages.size();
+        return ChatMessages.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(chatMassages.get(position).senderId.equals(senderId)){
+        if(ChatMessages.get(position).senderId.equals(senderId)){
 
             return VIEW_TYPE_SENT;
         }
@@ -66,31 +69,31 @@ if(getItemViewType(position)==VIEW_TYPE_SENT){
         }
     }
 
-    static class SentMassageViewHolder extends RecyclerView.ViewHolder{
+    static class SentmessageViewHolder extends RecyclerView.ViewHolder{
 
-        private  final ItemContainerSentMassageBinding binding;
+        private  final  ItemContainerSentMessegeBinding binding;
 
-         SentMassageViewHolder(ItemContainerSentMassageBinding itemContainerSentMassageBinding){
-            super(itemContainerSentMassageBinding.getRoot());
-            binding=itemContainerSentMassageBinding;
+         SentmessageViewHolder(ItemContainerSentMessegeBinding itemContainerSentmessageBinding){
+            super(itemContainerSentmessageBinding.getRoot());
+            binding=itemContainerSentmessageBinding;
 
         }
-        void setData(ChatMassage chatMassage){
-            binding.sentMassage.setText(chatMassage.massage);
-            binding.sentTime.setText(chatMassage.dateTime);
+        void setData(ChatMessage ChatMessage){
+            binding.sentmessage.setText(ChatMessage.message);
+            binding.sentTime.setText(ChatMessage.dateTime);
         }
     }
 
-    static class ReceivedMassageViewHolder extends RecyclerView.ViewHolder{
-private final ItemContainerReceiveMassageBinding binding;
-        public ReceivedMassageViewHolder(ItemContainerReceiveMassageBinding itemContainerReceiveMassageBinding) {
-            super(itemContainerReceiveMassageBinding.getRoot());
-            binding=itemContainerReceiveMassageBinding;
+    static class ReceivedmessageViewHolder extends RecyclerView.ViewHolder{
+private final ItemContainerReceiveMessegeBinding binding;
+        public ReceivedmessageViewHolder(ItemContainerReceiveMessegeBinding itemContainerReceivemessageBinding) {
+            super(itemContainerReceivemessageBinding.getRoot());
+            binding=itemContainerReceivemessageBinding;
         }
 
-        void setData(ChatMassage chatMassage,String profilepicUrl){
-            binding.receiveMassage.setText(chatMassage.massage);
-            binding.receiveTime.setText(chatMassage.dateTime);
+        void setData(ChatMessage ChatMessage,String profilepicUrl){
+            binding.receivemessage.setText(ChatMessage.message);
+            binding.receiveTime.setText(ChatMessage.dateTime);
             Picasso.get().load(profilepicUrl).into(binding.chatprofileImage);
         }
     }

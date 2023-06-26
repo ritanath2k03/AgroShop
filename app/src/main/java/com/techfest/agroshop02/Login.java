@@ -176,8 +176,7 @@ if(task.isSuccessful()){
                 if(FarmersModel.KEY_FNAME!=null){
                     FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 
-                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document("Farmer")
-                            .collection(auth.getUid()).document("Profile").collection("Attribute")
+                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER)
                             .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
                             .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
                             .get()
@@ -242,8 +241,7 @@ if(task.isSuccessful()){
               if(FarmersModel.KEY_DNAME!=null){
                     FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 
-                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document("Distributor")
-                            .collection(auth.getUid()).document("Profile").collection("Attribute")
+                    firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER)
                             .whereEqualTo(FarmersModel.KEY_EMAIL,activityLoginBinding.Email.getText().toString())
                             .whereEqualTo(FarmersModel.KEY_PAASSWORD,activityLoginBinding.LoginPassword.getText().toString())
                             .get()

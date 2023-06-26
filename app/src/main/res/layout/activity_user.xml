@@ -58,7 +58,7 @@
             android:layout_gravity="center"
             android:layout_height="25dp"/>
         <TextView
-            android:id="@+id/textErrorMassage"
+            android:id="@+id/textErrormessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

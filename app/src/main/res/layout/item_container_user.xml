@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
-    android:background="#D9E6D1"
-    android:layout_marginBottom="2dp">
+    android:background="@drawable/button_style"
+    android:layout_marginBottom="2dp"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageProfile"
@@ -26,46 +27,63 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:ellipsize="end"
-
+        android:gravity="left"
         android:maxLines="1"
+        android:paddingLeft="17dp"
         android:text="Ritanath"
         android:textColor="@color/black"
-        android:textSize="13dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/textDesignation"
         app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textDesignation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Designation"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:gravity="left"
+        android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:gravity="right"
         android:maxLines="1"
         android:text="Rith@test.com"
-        android:layout_marginStart="5dp"
         android:textColor="#593A8F"
-        android:textSize="10dp"
-android:gravity="center"
+
+
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toBottomOf="@+id/textName" />
+
     <TextView
-        android:id="@+id/textUri"
+        android:id="@+id/PhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:ellipsize="end"
-
+        android:gravity="left"
         android:maxLines="1"
-
-
+        android:paddingLeft="20dp"
+        android:text="908998"
         android:textSize="13dp"
-        android:visibility="invisible"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textEmail"
         app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

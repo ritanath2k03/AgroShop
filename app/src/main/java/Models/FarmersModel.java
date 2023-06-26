@@ -2,7 +2,7 @@ package Models;
 
 public class FarmersModel {
    String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
-   public  static final String KEY_COLLECTION_USER="USERS";
+   public  static final String KEY_COLLECTION_USER="Users";
    public  static final String KEY_DNAME="DName";
    public  static final String KEY_EMAIL="Email";
    public  static final String KEY_PAASSWORD="Password";
@@ -19,11 +19,17 @@ public class FarmersModel {
    public  static final String KEY_FCM="fcmToken";
    public  static final String KEY_USER="EachUser";
 
-   public  static final String KEY_COLLECTION_CHAT="chat";
+   public  static final String KEY_COLLECTION_CHAT="CHAT";
    public  static final String KEY_SENDER_ID="senderId";
    public  static final String KEY_RECEIVER_ID="receiverId";
-   public  static final String KEY_MASSAGE="massage";
+   public  static final String KEY_message="message";
    public  static final String KEY_TIMESTAMP="timestamp";
+   public static final String KEY_COLLECTION_CONVERSATIONS = "conversations";
+   public static final String KEY_SENDER_NAME = "senderName";
+   public static final String KEY_RECEIVER_NAME = "receiverName";
+   public static final String KEY_SENDER_IMAGE ="senderImage";
+   public static final String KEY_RECEIVER_IMAGE = "receiverImage";
+   public static final String KEY_LAST_MESSAGE= "lastMessage";
 
 
 

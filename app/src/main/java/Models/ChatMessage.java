@@ -2,8 +2,8 @@ package Models;
 
 import java.util.Date;
 
-public class ChatMassage {
-    public  String senderId,receiverId,dateTime,massage;
+public class ChatMessage {
+    public  String senderId,receiverId,dateTime,message;
     public Date dateObject;
     public String conversionId, conversionName, conversionImage;
 }
