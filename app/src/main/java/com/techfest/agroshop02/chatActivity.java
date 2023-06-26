@@ -3,7 +3,9 @@ package com.techfest.agroshop02;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -45,6 +47,8 @@ loadReceiverDetails();
 setListerners();
 init();
 listenMassages();
+
+
     }
 
     private void init(){
@@ -117,7 +121,7 @@ private final EventListener<QuerySnapshot> eventListener=((value, error) -> {
         int count=chatMassages.size();
         for(DocumentChange documentChange: value.getDocumentChanges()){
             if(documentChange.getType()==DocumentChange.Type.ADDED)
-            {
+            {Log.d("AutoId",documentChange.getDocument().getId());
                 ChatMassage chatMassage=new ChatMassage();
                 chatMassage.senderId=documentChange.getDocument().getString(FarmersModel.KEY_SENDER_ID);
                 chatMassage.receiverId=documentChange.getDocument().getString(FarmersModel.KEY_RECEIVER_ID);

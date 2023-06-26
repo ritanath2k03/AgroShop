@@ -81,6 +81,7 @@ preferanceManager=new PreferanceManager(getApplicationContext());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         activitySignupBinding.spinnerLanguages.setAdapter(adapter);
+
         activitySignupBinding.spinnerLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
