@@ -31,6 +31,17 @@ public class FarmersModel {
    public static final String KEY_RECEIVER_IMAGE = "receiverImage";
    public static final String KEY_LAST_MESSAGE= "lastMessage";
 
+   public static final String KEY_ITEM_NAME= "itemName";
+   public static final String KEY_ITEM_DESCRIPTION= "itemDescription";
+   public static final String KEY_ITEM_PICTURE= "itemPicture";
+   public static final String KEY_ITEM_PRICE= "itemPrice";
+   public static final String KEY_FARMER_LOCATION= "farmerLocation";
+   public static final String KEY_ITEM_STATUS= "itemStatus";
+
+
+
+
+
 
 
 

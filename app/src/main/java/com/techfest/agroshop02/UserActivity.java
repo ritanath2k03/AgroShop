@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ getUsers();
                 .addOnCompleteListener(task -> {
                     loading(false);
                     String currentUser =preferanceManager.getString(FarmersModel.KEY_USERID);
+                    Log.d("UserID",currentUser);
                     if(task.isSuccessful()&&task.getResult()!=null){
                         List<User> users=new ArrayList<>();
                         for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
