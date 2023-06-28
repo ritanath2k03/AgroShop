@@ -146,6 +146,7 @@ conversation.add(ChatMessage);
     });
 
     private void updateToken(String token){
+        preferanceManager.putString(FarmersModel.KEY_FCM, token);
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 
         DocumentReference documentReference = firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER)

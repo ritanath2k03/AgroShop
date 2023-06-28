@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -19,6 +21,12 @@ import com.squareup.picasso.Picasso;
 import com.techfest.agroshop02.adapter.ChatAdapter;
 import com.techfest.agroshop02.databinding.ActivityChatBinding;
 import com.techfest.agroshop02.databinding.ActivityLoginBinding;
+import com.techfest.agroshop02.network.ApiClient;
+import com.techfest.agroshop02.network.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +43,9 @@ import Models.ChatMessage;
 import Models.FarmersModel;
 import Models.PreferanceManager;
 import Models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class chatActivity extends BaseActivity {
     ActivityChatBinding activityChatBinding;
@@ -114,11 +125,78 @@ listenmessages();
             conversion.put(FarmersModel.KEY_TIMESTAMP, new Date());
             addConversion(conversion);
         }
+        if (!isReceiverAvailable) {
+            try {
+                JSONArray tokens = new JSONArray();
+                tokens.put(receiverUser.token);
+
+                JSONObject data = new JSONObject();
+                data.put(FarmersModel.KEY_USERID, preferanceManager.getString(FarmersModel.KEY_USERID));
+                if(preferanceManager.getString(FarmersModel.KEY_FNAME)!=null){
+                    data.put(FarmersModel.KEY_FNAME, preferanceManager.getString(FarmersModel.KEY_FNAME));
+                }
+                if(preferanceManager.getString(FarmersModel.KEY_CNAME)!=null){
+                    data.put(FarmersModel.KEY_CNAME, preferanceManager.getString(FarmersModel.KEY_CNAME));
+                }
+                if(preferanceManager.getString(FarmersModel.KEY_DNAME)!=null){
+                    data.put(FarmersModel.KEY_DNAME, preferanceManager.getString(FarmersModel.KEY_DNAME));
+                }
+                data.put(FarmersModel.KEY_FCM, preferanceManager.getString(FarmersModel.KEY_FCM));
+                data.put(FarmersModel.KEY_message, activityChatBinding.editText.getText().toString());
+
+                JSONObject body = new JSONObject();
+                body.put(FarmersModel.REMOTE_MSG_DATA, data);
+                body.put(FarmersModel.REMOTE_MSG_REGISTRATION_IDS, tokens);
+
+                sendNotification(body.toString());
+
+
+            }catch (Exception exception) {
+                showToast(exception.getMessage());
+            }
+        }
         activityChatBinding.editText.setText(null);
 //        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT).add(message);
 //        activityChatBinding.editText.setText(null);
     }
 
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendNotification(String messageBody) {
+        ApiClient.getClient().create(ApiService.class).sendMessage(
+                FarmersModel.getRemoteMsgHeaders(),messageBody
+        ).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                if(response.isSuccessful()){
+                    try {
+                        if (response.body() != null) {
+                            JSONObject responseJson = new JSONObject(response.body());
+                            JSONArray results = responseJson.getJSONArray("results");
+                            if (responseJson.getInt("failure") ==1) {
+                                JSONObject error = (JSONObject) results.get(0);
+                                showToast(error.getString("error"));
+                                return;
+                            }
+                        }
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }else {
+                    showToast("Error: " + response.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                showToast(t.getMessage());
+            }
+        });
+    }
     private void listenAvailabilityOfReceiver() {
         firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document(
                 receiverUser.id
@@ -133,12 +211,19 @@ listenmessages();
                     ).intValue();
                     isReceiverAvailable = availability == 1;
                 }
+                receiverUser.token = value.getString(FarmersModel.KEY_FCM);
+                if (receiverUser.image == null) {
+                    receiverUser.image = value.getString(FarmersModel.KEY_PICTURE_URI);
+                    chatAdapter.setReceiverProfileImage(receiverUser.image);
+                    chatAdapter.notifyItemRangeChanged(0,ChatMessages.size());
+                }
             }
             if(isReceiverAvailable) {
                 activityChatBinding.textAvailability.setVisibility(View.VISIBLE);
             } else {
                 activityChatBinding.textAvailability.setVisibility(View.GONE);
             }
+
         });
     }
 
@@ -198,6 +283,7 @@ private final EventListener<QuerySnapshot> eventListener=((value, error) -> {
 });
 
     private String getReadableDateTime(Date date){
+
         return new SimpleDateFormat("hh:mm:a", Locale.getDefault()).format(date);
     }
 

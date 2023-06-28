@@ -19,7 +19,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="8dp"
         app:layout_constraintWidth_max="wrap"
-        android:paddingRight="50dp"
+        android:paddingRight="20dp"
 
         android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"

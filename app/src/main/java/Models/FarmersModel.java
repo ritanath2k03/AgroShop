@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.HashMap;
+
 public class FarmersModel {
    String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
    public  static final String KEY_COLLECTION_USER="Users";
@@ -9,6 +11,7 @@ public class FarmersModel {
    public  static final String KEY_PREFERENCE_NAME="ChatAppPreferance";
    public  static final String KEY_IS_SIGNED_IN="IsSignedIn";
    public  static final String KEY_USERID="UserId";
+
    public  static final String KEY_IMAGE="Image";
    public  static final String KEY_PHONE_NUMBER="Phone";
    public  static final String KEY_FNAME="FName";
@@ -40,6 +43,45 @@ public class FarmersModel {
 
 
    public static final String KEY_AVAILABILITY = "availability";
+   public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
+   public  static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
+   public static final String REMOTE_MSG_DATA = "data";
+   public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
+
+   public static HashMap<String, String> remoteMsgHeaders = null;
+   public static HashMap<String, String> getRemoteMsgHeaders() {
+       if (remoteMsgHeaders == null) {
+           remoteMsgHeaders =new HashMap<>();
+           remoteMsgHeaders.put(
+                   REMOTE_MSG_AUTHORIZATION,
+                   "key=AAAA8rzvZBQ:APA91bHU5GaU_1W00NY5YscsgUP7JvjDCiZaKvpWHOlrYyPuHNVuJ77A01fJxM_KpyrFC_YM67Km4tOLO-5QZzLdOWUoUK1Glk0IxCKjcIBHUyl1qBs1fat1xVRobfAxaxMMjnEQwgsI"
+           );
+           remoteMsgHeaders.put(
+                   REMOTE_MSG_CONTENT_TYPE,
+                   "application/json"
+           );
+       }
+       return remoteMsgHeaders;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
 
 
 

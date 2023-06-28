@@ -20,10 +20,14 @@ import Models.ChatMessage;
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
  private final    List<ChatMessage> ChatMessages;
  private final String senderId;
- private final String receiverProfileImage;
+ private  String receiverProfileImage;
 
  public static final int VIEW_TYPE_SENT=1;
  public static final int VIEW_TYPE_RECEIVE=2;
+ public void setReceiverProfileImage(String bitmap){
+     receiverProfileImage = bitmap;
+ }
+
 
     public ChatAdapter(List<ChatMessage> ChatMessages, String senderId, String receiverProfileImage) {
         this.ChatMessages = ChatMessages;
@@ -94,7 +98,10 @@ private final ItemContainerReceiveMessegeBinding binding;
         void setData(ChatMessage ChatMessage,String profilepicUrl){
             binding.receivemessage.setText(ChatMessage.message);
             binding.receiveTime.setText(ChatMessage.dateTime);
-            Picasso.get().load(profilepicUrl).into(binding.chatprofileImage);
+            if (profilepicUrl!=null){
+                Picasso.get().load(profilepicUrl).into(binding.chatprofileImage);
+            }
+
         }
     }
 }

@@ -27,7 +27,7 @@
        android:paddingBottom="8dp"
         android:paddingTop="8dp"
         app:layout_constraintWidth_max="wrap"
-        android:paddingRight="50dp"
+        android:paddingRight="20dp"
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
         android:text="Hi everyone "
