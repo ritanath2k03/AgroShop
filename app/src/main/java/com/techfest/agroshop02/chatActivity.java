@@ -1,6 +1,6 @@
 package com.techfest.agroshop02;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 import Models.ChatMessage;
@@ -35,7 +36,7 @@ import Models.FarmersModel;
 import Models.PreferanceManager;
 import Models.User;
 
-public class chatActivity extends AppCompatActivity {
+public class chatActivity extends BaseActivity {
     ActivityChatBinding activityChatBinding;
    private User receiverUser;
    private List<ChatMessage>  ChatMessages;
@@ -43,6 +44,7 @@ public class chatActivity extends AppCompatActivity {
    private PreferanceManager preferanceManager;
    private FirebaseFirestore firebaseFirestore;
    private String conversionId = null;
+   private Boolean isReceiverAvailable = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +117,29 @@ listenmessages();
         activityChatBinding.editText.setText(null);
 //        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT).add(message);
 //        activityChatBinding.editText.setText(null);
+    }
+
+    private void listenAvailabilityOfReceiver() {
+        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).document(
+                receiverUser.id
+        ).addSnapshotListener(chatActivity.this,(value, error) -> {
+            if(error != null) {
+                return;
+            }
+            if(value != null) {
+                if (value.getLong(FarmersModel.KEY_AVAILABILITY) != null) {
+                    int availability = Objects.requireNonNull(
+                            value.getLong(FarmersModel.KEY_AVAILABILITY)
+                    ).intValue();
+                    isReceiverAvailable = availability == 1;
+                }
+            }
+            if(isReceiverAvailable) {
+                activityChatBinding.textAvailability.setVisibility(View.VISIBLE);
+            } else {
+                activityChatBinding.textAvailability.setVisibility(View.GONE);
+            }
+        });
     }
 
     private  void listenmessages(){
@@ -223,9 +248,9 @@ private final EventListener<QuerySnapshot> eventListener=((value, error) -> {
     };
 
 
-
-
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
+    }
 }

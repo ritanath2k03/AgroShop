@@ -1,6 +1,6 @@
 package com.techfest.agroshop02;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ import Models.FarmersModel;
 import Models.PreferanceManager;
 import Models.User;
 
-public class MainActivity extends AppCompatActivity implements ConversionListner {
+public class MainActivity extends BaseActivity implements ConversionListner {
     private ActivityMainBinding binding;
     private FirebaseAuth auth=FirebaseAuth.getInstance();
     private List<ChatMessage> conversation;

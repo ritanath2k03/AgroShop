@@ -1,6 +1,5 @@
 package com.techfest.agroshop02;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import Models.FarmersModel;
 import Models.PreferanceManager;
 import Models.User;
 
-public class UserActivity extends AppCompatActivity implements UserListeners {
+public class UserActivity extends BaseActivity implements UserListeners {
 ActivityUserBinding activityUserBinding;
 FirebaseAuth auth=FirebaseAuth.getInstance();
 PreferanceManager preferanceManager;

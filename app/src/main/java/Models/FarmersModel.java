@@ -39,6 +39,8 @@ public class FarmersModel {
    public static final String KEY_ITEM_STATUS= "itemStatus";
 
 
+   public static final String KEY_AVAILABILITY = "availability";
+
 
 
 
