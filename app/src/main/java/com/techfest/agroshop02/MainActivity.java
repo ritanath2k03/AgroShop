@@ -61,7 +61,7 @@ listenConvertation();
         database = FirebaseFirestore.getInstance();
     }
     private  void setListerner(){
-        binding.TextView.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(),UserActivity.class));});
+        binding.AddContact.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(),UserActivity.class));});
         binding.signout.setOnClickListener(view -> {signout();});
         binding.refresh.setOnClickListener(view -> {onRestart();});
     }
