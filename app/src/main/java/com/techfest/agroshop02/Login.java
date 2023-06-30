@@ -54,7 +54,7 @@ ActivityLoginBinding activityLoginBinding;
         preferanceManager=new PreferanceManager(getApplicationContext());
 
         if(preferanceManager.getBoolean(FarmersModel.KEY_IS_SIGNED_IN)){
-            startActivity(new Intent(Login.this,MainActivity.class));
+            startActivity(new Intent(Login.this,FarmerDashboard.class));
             finish();
         }
 
@@ -173,7 +173,7 @@ if(task.isSuccessful()){
 
 
              //             Toast.makeText(Login.this,preferanceManager.getString (FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
-                if(FarmersModel.KEY_FNAME!=null){
+                if(preferanceManager.getString(FarmersModel.KEY_FNAME)!=null){
                     FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 
                     firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER)
@@ -196,7 +196,7 @@ if(task.isSuccessful()){
                                     preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
 
                                     preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
-                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 }
@@ -228,7 +228,7 @@ if(task.isSuccessful()){
                                     preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
 
                                     preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
-                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 }
@@ -260,7 +260,7 @@ if(task.isSuccessful()){
                                     preferanceManager.putString(FarmersModel.KEY_DESIGNATION,documentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
 
                                     preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,documentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
-                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 }

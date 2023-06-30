@@ -21,6 +21,7 @@ public class FarmersModel {
    public  static final String KEY_DESIGNATION="Designation";
    public  static final String KEY_FCM="fcmToken";
    public  static final String KEY_USER="EachUser";
+   public  static final String KEY_USERNAME="userName";
 
    public  static final String KEY_COLLECTION_CHAT="CHAT";
    public  static final String KEY_SENDER_ID="senderId";
@@ -47,6 +48,11 @@ public class FarmersModel {
    public  static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
    public static final String REMOTE_MSG_DATA = "data";
    public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
+   public static final String KEY_PERSON_BIO = "bio";
+   public static final String KEY_PERSON_AGE = "age";
+   public static final String KEY_PERSON_LOCATION = "location";
+
+
 
    public static HashMap<String, String> remoteMsgHeaders = null;
    public static HashMap<String, String> getRemoteMsgHeaders() {

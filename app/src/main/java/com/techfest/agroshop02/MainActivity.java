@@ -4,6 +4,7 @@ package com.techfest.agroshop02;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity implements ConversionListner {
 getToken();
 setListerner();
 listenConvertation();
+
     }
 
     private void init() {
@@ -63,7 +65,10 @@ listenConvertation();
     private  void setListerner(){
         binding.AddContact.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(),UserActivity.class));});
         binding.signout.setOnClickListener(view -> {signout();});
-        binding.refresh.setOnClickListener(view -> {onRestart();});
+        binding.mainBack.setOnClickListener(view -> {   Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);startActivity(intent);});
+        binding.refresh.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),FarmerDashboard.class));});
     }
     private  void loadUserDetails(){
 
