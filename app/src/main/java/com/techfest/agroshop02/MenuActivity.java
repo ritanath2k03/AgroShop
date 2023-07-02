@@ -46,8 +46,18 @@ loadUserDetails();
         Long date=System.currentTimeMillis();
         SimpleDateFormat dateFormat =new SimpleDateFormat("dd-MMMM-yyyy - HH:mm a", Locale.getDefault());
         String dateStr = dateFormat.format(date);
-        binding.NameMenu.setText(preferanceManager.getString(FarmersModel.KEY_FNAME));
+
         binding.MenuTime.setText(dateStr);
+        getName();
+    }
+
+    private void getName() {
+        if(preferanceManager.getString(FarmersModel.KEY_FNAME)!=null){
+            binding.NameMenu.setText(preferanceManager.getString(FarmersModel.KEY_FNAME));
+        }
+       else if(preferanceManager.getString(FarmersModel.KEY_DNAME)!=null){
+            binding.NameMenu.setText(preferanceManager.getString(FarmersModel.KEY_DNAME));
+        }
     }
 
     private void getMenuList() {
@@ -69,6 +79,7 @@ loadUserDetails();
                               item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                               item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                               item.productId=queryDocumentSnapshot.getId();
+item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS);
 
                               item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                               item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);

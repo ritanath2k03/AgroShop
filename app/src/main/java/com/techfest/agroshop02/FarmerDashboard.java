@@ -55,7 +55,7 @@ PreferanceManager preferanceManager;
         menuMap.put(FarmersModel.KEY_FARMER_ID,preferanceManager.getString(FarmersModel.KEY_USERID));
         menuMap.put(FarmersModel.KEY_ITEM_DATE,new Date());
         menuMap.put(FarmersModel.KEY_FARMER_LOCATION,preferanceManager.getString(FarmersModel.KEY_PERSON_LOCATION));
-        menuMap.put(FarmersModel.KEY_ITEM_STATUS,1);
+        menuMap.put(FarmersModel.KEY_ITEM_STATUS,"1");
         FirebaseFirestore firebaseFirestore= FirebaseFirestore.getInstance();
 
 

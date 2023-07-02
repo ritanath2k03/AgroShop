@@ -2,6 +2,7 @@ package com.techfest.agroshop02.adapter;
 
 import android.graphics.Color;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.techfest.agroshop02.databinding.EachMenuItemBinding;
 import com.techfest.agroshop02.listeners.MenuItemListners;
@@ -87,45 +89,40 @@ holder.setData(menuItems.get(position));
 
         private void checkDesignation(MenuItem menuItem) {
      if(preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Farmer")){
+         Log.d("ProductStatus",menuItem.productStatus);
 
-         if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS)==null){
-
-             binding.ckechout.setBackgroundColor(Color.CYAN);
-
-             binding.ckechout.setText("Add Product");
-             preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
-         }
-         else {
-
-
-             if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")){
+         if(menuItem.productStatus.matches("0")){
                  binding.ckechout.setText("Available");
                  binding.ckechout.setBackgroundColor(Color.GREEN);
                  binding.ckechout.setVisibility(View.VISIBLE);
              }
-             else {
+             else if(menuItem.productStatus.matches("1")){
                  binding.ckechout.setBackgroundColor(Color.RED);
                  binding.ckechout.setText("UnAvailable");
                  binding.ckechout.setVisibility(View.VISIBLE);
              }
-         }
+
              final int[] status = {0};
 
        binding.ckechout.setOnClickListener(view -> {
-           if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("UnAvailable")))
+           if(menuItem.personDesignation.matches("Farmer")&&(menuItem.productStatus.matches("1")))
            {
 
                binding.ckechout.setText("Available");
                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
                status[0] +=1;
                binding.ckechout.setBackgroundColor(Color.GREEN);
+               FirebaseFirestore  firebaseFirestore=FirebaseFirestore.getInstance();
+               firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION).document(menuItem.productId).update(FarmersModel.KEY_ITEM_STATUS,"0");
 
-           }else if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")))
+           }else if(menuItem.personDesignation.matches("Farmer")&&(menuItem.productStatus.matches("0")))
            {
                binding.ckechout.setText("UnAvailable");
                status[0] -=1;
                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"UnAvailable");
                binding.ckechout.setBackgroundColor(Color.RED);
+               FirebaseFirestore  firebaseFirestore=FirebaseFirestore.getInstance();
+               firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION).document(menuItem.productId).update(FarmersModel.KEY_ITEM_STATUS,"1");
            }
        });
 
