@@ -1,6 +1,7 @@
 package com.techfest.agroshop02.adapter;
 
 import android.graphics.Color;
+import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +66,7 @@ holder.setData(menuItems.get(position));
         public void setData(MenuItem menuItem) {
             preferanceManager=new PreferanceManager(itemView.getContext());
             binding.productName.setText(menuItem.productName);
-            binding.ckechout.setBackgroundColor(Color.CYAN);
-            binding.ckechout.setVisibility(View.VISIBLE);
-            binding.ckechout.setText("Add Product");
+
             Picasso.get().load(menuItem.productImage).into(binding.PoductImage);
             int quentity = 0;
             binding.poductNegetive.setOnClickListener(view -> {
@@ -82,47 +81,68 @@ holder.setData(menuItems.get(position));
             binding.productDescription.setText(menuItem.productDesciption);
             binding.productDate.setText(menuItem.productdate);
             binding.productAmount.setText("Rs."+menuItem.productPrice+"/kg");
-            if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS)==null){
-                binding.ckechout.setBackgroundColor(Color.CYAN);
-                binding.ckechout.setVisibility(View.VISIBLE);
-                binding.ckechout.setText("Add Product");
-                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
-            }
-            else {
-
-                if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("UnAvailable")){
-                    binding.ckechout.setBackgroundColor(Color.GREEN);
-                    binding.ckechout.setText("Available");
-                    preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
-                } else if (preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")) {
-                    binding.ckechout.setText("UnAvailable");
-                    preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"UnAvailable");
-                    binding.ckechout.setBackgroundColor(Color.RED);
-                }
-
-            }
-
-            final int[] status = {0};
-
-            binding.ckechout.setOnClickListener(view -> {
-                if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("UnAvailable")))
-                {
-                binding.ckechout.setText("Available");
-                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
-                status[0] +=1;
-                binding.ckechout.setBackgroundColor(Color.GREEN);
-            }else if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")))
-                {
-                    binding.ckechout.setText("UnAvailable");
-                    status[0] -=1;
-                    preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"UnAvailable");
-                    binding.ckechout.setBackgroundColor(Color.RED);
-                }
-            });
-
-
             binding.getRoot().setOnClickListener(v->{menuItemListners.onItemClicked(menuItem);});
+            checkDesignation(menuItem);
         }
+
+        private void checkDesignation(MenuItem menuItem) {
+     if(preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Farmer")){
+
+         if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS)==null){
+
+             binding.ckechout.setBackgroundColor(Color.CYAN);
+
+             binding.ckechout.setText("Add Product");
+             preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
+         }
+         else {
+
+
+             if(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")){
+                 binding.ckechout.setText("Available");
+                 binding.ckechout.setBackgroundColor(Color.GREEN);
+                 binding.ckechout.setVisibility(View.VISIBLE);
+             }
+             else {
+                 binding.ckechout.setBackgroundColor(Color.RED);
+                 binding.ckechout.setText("UnAvailable");
+                 binding.ckechout.setVisibility(View.VISIBLE);
+             }
+         }
+             final int[] status = {0};
+
+       binding.ckechout.setOnClickListener(view -> {
+           if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("UnAvailable")))
+           {
+
+               binding.ckechout.setText("Available");
+               preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
+               status[0] +=1;
+               binding.ckechout.setBackgroundColor(Color.GREEN);
+
+           }else if(menuItem.personDesignation.matches("Farmer")&&(preferanceManager.getString(FarmersModel.KEY_ITEM_STATUS).matches("Available")))
+           {
+               binding.ckechout.setText("UnAvailable");
+               status[0] -=1;
+               preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"UnAvailable");
+               binding.ckechout.setBackgroundColor(Color.RED);
+           }
+       });
+
+     }
+     else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor")) {
+         binding.ckechout.setVisibility(View.VISIBLE);
+         binding.AddingId.setVisibility(View.VISIBLE);
+
+
+
+         binding.ckechout.setOnClickListener(view -> {
+             Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+         });
+
+     }
+        }
+
 
         private void getItemNumber(int quentity) {
        //get the item count for distributor

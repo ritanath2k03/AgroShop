@@ -77,14 +77,13 @@ loadUserDetails();
 
                          lists.add(item);
                           }
-                          else if (currentUser.matches(queryDocumentSnapshot.getString(FarmersModel.KEY_DISTRIBUTOR_ID)))  { MenuItem item=new MenuItem();
+                          else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor"))
+                          { MenuItem item=new MenuItem();
+
                               Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
-
-
                               item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                               item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                               item.productId=queryDocumentSnapshot.getId();
-
                               item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                               item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                               item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
