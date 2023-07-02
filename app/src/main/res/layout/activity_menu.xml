@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity"
+    android:background="#24AE6E">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_content_bottom"
+        android:layout_marginTop="160dp"
+        />
+
+    <TextView
+
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="MenuList"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/NameMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingLeft="30dp"
+        android:text="Souvik"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/MenuTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="40dp"
+        android:text="10:30pm"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/NameMenu"
+        app:layout_constraintStart_toStartOf="@+id/NameMenu"
+        app:layout_constraintTop_toBottomOf="@+id/NameMenu"
+        android:layout_marginTop="5dp"/>
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerViewMenuItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="180dp"
+    android:layout_marginLeft="20dp"
+    app:layout_constraintStart_toStartOf="@+id/NameMenu"
+
+    android:overScrollMode="never"
+
+    app:layout_constraintTop_toBottomOf="@+id/textView4"
+    android:layout_marginRight="20dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

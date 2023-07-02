@@ -16,8 +16,7 @@
         android:outlineSpotShadowColor="@color/white"
         android:outlineAmbientShadowColor="@color/black"
         app:queryHint="Search Here "
-
-app:queryBackground="@drawable/button_style"
+app:queryBackground="@drawable/linear_layout_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -17,12 +17,12 @@
         android:theme="@style/Theme.AgroShop"
         tools:targetApi="31">
         <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".FarmerDashboard"
             android:exported="true"
-            android:theme="@style/Base.Theme.AgroShopLogin"/>
-
-
-
+            android:theme="@style/Base.Theme.AgroShopLogin" />
         <activity
             android:name=".chatActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -39,9 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
         <activity
             android:name=".SignupActivity"
             android:exported="true" />

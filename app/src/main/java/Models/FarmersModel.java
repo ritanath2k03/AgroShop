@@ -3,7 +3,9 @@ package Models;
 import java.util.HashMap;
 
 public class FarmersModel {
-   String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
+
+    public static final String KEY_DISTRIBUTOR_ID = "distributorId";
+    String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
    public  static final String KEY_COLLECTION_USER="Users";
    public  static final String KEY_DNAME="DName";
    public  static final String KEY_EMAIL="Email";
@@ -41,6 +43,9 @@ public class FarmersModel {
    public static final String KEY_ITEM_PRICE= "itemPrice";
    public static final String KEY_FARMER_LOCATION= "farmerLocation";
    public static final String KEY_ITEM_STATUS= "itemStatus";
+    public static final String KEY_FARMER_ID ="FarmerId" ;
+    public static final String KEY_ITEM_DATE = "ItemDate";
+   public static final String KEY_MENU_COLLECTION= "MenuCollection";
 
 
    public static final String KEY_AVAILABILITY = "availability";

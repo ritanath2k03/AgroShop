@@ -229,7 +229,8 @@ listenmessages();
 
     private  void listenmessages(){
 FirebaseAuth auth=FirebaseAuth.getInstance();
-        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT).whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
+        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT)
+                .whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
                 .whereEqualTo(FarmersModel.KEY_RECEIVER_ID,receiverUser.id)
                 .addSnapshotListener(eventListener);
 //        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT)
