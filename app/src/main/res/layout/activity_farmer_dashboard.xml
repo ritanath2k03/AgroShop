@@ -243,7 +243,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="Edit Profile"
+                android:text="Menu List"
                 android:textColor="@color/teal_200"
                 android:backgroundTint="@color/purple_700"
                 android:textSize="20dp" />
