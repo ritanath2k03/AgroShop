@@ -46,7 +46,7 @@ PreferanceManager preferanceManager;
         getDashboardData();
         setListners();
         addProductDetails();
-       getImage();
+        getImage();
         Log.d("Designation",preferanceManager.getString(FarmersModel.KEY_DESIGNATION));
     }
 
@@ -130,6 +130,7 @@ binding.addButton.setVisibility(View.VISIBLE);
     }
 
     private void setListners() {
+        binding.DashboardName.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),UpdateProfile.class));});
         binding.chat.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MainActivity.class));});
         binding.EditProfileBtn.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MenuActivity.class));});
     }

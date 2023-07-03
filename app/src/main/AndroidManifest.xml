@@ -20,6 +20,9 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
             android:name=".FarmerDashboard"
             android:exported="true"
             android:theme="@style/Base.Theme.AgroShopLogin" />

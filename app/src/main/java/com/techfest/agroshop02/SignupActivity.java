@@ -239,6 +239,9 @@ else {
                         signinmap.put(FarmersModel.KEY_PHONE_NUMBER,activitySignupBinding.Phone.getText().toString());
                         signinmap.put(FarmersModel.KEY_USERNAME,activitySignupBinding.Username.getText().toString());
                         signinmap.put(FarmersModel.KEY_PERSON_LOCATION,null);
+                        signinmap.put(FarmersModel.KEY_PERSON_AGE,null);
+
+                        signinmap.put(FarmersModel.KEY_PERSON_BIO,null);
 signinmap.put(FarmersModel.KEY_USERID,auth.getUid());
                         final int[] selector = {0};
                         activitySignupBinding.spinnerLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

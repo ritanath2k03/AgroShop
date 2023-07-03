@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateProfile"
+    tools:ignore="ExtraText">
+
+    <RelativeLayout
+        android:id="@+id/toolbarRL"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF5722"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:src="@drawable/baseline_arrow_back_png" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Edit Profile"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/editProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/toolbarRL"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/person_picture"/>
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editProfile"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColorHint="@color/black"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:drawableStart="@drawable/person_picture"
+        android:drawablePadding="10dp"
+        android:textColor="@color/black"
+        android:inputType="textPersonName|textCapWords"
+        android:hint="User Name"/>
+
+
+    <EditText
+        android:id="@+id/phoneEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameEditText"      android:textColorHint="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:drawableStart="@drawable/baseline_phone_24"
+        android:drawablePadding="10dp"
+        android:textColor="@color/black"
+        android:inputType="phone"
+        android:hint="Mobile Number"/>
+    <EditText
+        android:id="@+id/bioEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phoneEdit"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColorHint="@color/black"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:drawableStart="@drawable/baseline_menu_24"
+        android:drawablePadding="10dp"
+        android:textColor="@color/black"
+        android:inputType="textLongMessage"
+        android:hint="Bio"/>
+    <EditText
+        android:id="@+id/ageEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bioEdit"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:textColorHint="@color/black"
+        android:drawableStart="@drawable/info_png"
+        android:drawablePadding="10dp"
+        android:textColor="@color/black"
+        android:inputType="number"
+        android:hint="Age"/>
+    <TextView
+        android:id="@+id/emailEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ageEdit"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColorHint="@color/black"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:drawableStart="@drawable/mail_picture"
+        android:drawablePadding="10dp"
+        android:textColor="@color/black"
+        android:inputType="textEmailAddress"
+        android:hint="Email Id"/>
+
+    <LinearLayout
+        android:id="@+id/addressCodeEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/emailEdit">
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/addressEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressCodeEdit"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:background="#EAE7E7"
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:drawablePadding="10dp"
+        android:textColorHint="@color/black"
+        android:inputType="textPostalAddress"
+        android:textColor="@color/black"
+        android:hint="Address"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:background="#FF5722"
+        android:padding="15dp"
+        android:text="Update"/>
+
+
+
+</RelativeLayout>
