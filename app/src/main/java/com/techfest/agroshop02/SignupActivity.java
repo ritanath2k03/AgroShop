@@ -176,6 +176,7 @@ preferanceManager=new PreferanceManager(getApplicationContext());
      @Override
      public void onClick(View view) {
          Toast.makeText(SignupActivity.this, "Now Login with Credentials", Toast.LENGTH_SHORT).show();
+         startActivity(new Intent(getApplicationContext(),Login.class));
 
      }
  });

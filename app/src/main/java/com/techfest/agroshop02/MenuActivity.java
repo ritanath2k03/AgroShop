@@ -1,11 +1,13 @@
 package com.techfest.agroshop02;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,14 +28,14 @@ import Models.FarmersModel;
 import Models.MenuItem;
 import Models.PreferanceManager;
 
-public class MenuActivity extends AppCompatActivity implements MenuItemListners{
+public class MenuActivity extends AppCompatActivity implements MenuItemListners {
     ActivityMenuBinding binding;
     PreferanceManager preferanceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMenuBinding.inflate(getLayoutInflater());
+        binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.swappableRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -42,11 +44,110 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners{
 
             }
         });
-        preferanceManager=new PreferanceManager(getApplicationContext());
+        preferanceManager = new PreferanceManager(getApplicationContext());
         getMenuList();
-loadUserDetails();
+        loadUserDetails();
+        setListners();
+
 
     }
+
+    private void setListners() {
+        binding.menuSearchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchdata(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchdata(newText);
+                return false;
+            }
+        });
+    }
+
+    private void searchdata(String query) {
+        binding.recyclerViewMenuItem.setVisibility(View.GONE);
+        if(query.isEmpty()){
+            getMenuList();
+
+        }
+
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        if(preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Farmer")){
+            firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION)
+                    .whereEqualTo(FarmersModel.KEY_ITEM_NAME,query)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        String currrntUser=preferanceManager.getString(FarmersModel.KEY_USERID);
+                        if(task.isSuccessful()&&task.getResult()!=null){
+                            List<MenuItem> lists=new ArrayList<>();
+                            lists.clear();
+                            for(QueryDocumentSnapshot snapshot:task.getResult()){
+                                MenuItem menuItem=new MenuItem();
+                                if(snapshot.getString(FarmersModel.KEY_FARMER_ID).matches(currrntUser)){
+                                    menuItem.productStatus=snapshot.getString(FarmersModel.KEY_ITEM_STATUS);
+                                    menuItem.productId=snapshot.getId();
+                                    menuItem.productPrice=snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                    menuItem.productdate=snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                    menuItem.productName=snapshot.getString(FarmersModel.KEY_ITEM_NAME);
+                                   menuItem.productImage=snapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
+                                   menuItem.personDesignation=snapshot.getString(FarmersModel.KEY_DESIGNATION);
+                                   menuItem.productDesciption=snapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
+                                   lists.add(menuItem);
+
+                                }
+                            }
+                            if(lists.size()>0) {
+                           MenuListAdpater adpater = new MenuListAdpater(lists, this);
+                           binding.recyclerViewMenuItem.setAdapter(adpater);
+                                binding.recyclerViewMenuItem.setVisibility(View.VISIBLE);
+ }
+
+                        }
+                    });
+
+        }
+        else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor")) {
+            firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION)
+
+                                      .whereEqualTo(FarmersModel.KEY_ITEM_NAME,query)
+                                       .get()
+                    .addOnCompleteListener(task -> {
+                        if(task.isSuccessful()&&task.getResult()!=null){
+                            List<MenuItem> lists=new ArrayList<>();
+                            lists.clear();
+                            for(QueryDocumentSnapshot snapshot:task.getResult()){
+                                MenuItem menuItem=new MenuItem();
+                                if(snapshot.getString(FarmersModel.KEY_ITEM_STATUS).matches("1")){
+                                    menuItem.productStatus = snapshot.getString(FarmersModel.KEY_ITEM_STATUS);
+                                   menuItem.productId = snapshot.getId();
+                                   menuItem.personDesignation = snapshot.getString(FarmersModel.KEY_DESIGNATION);
+                                   menuItem.productPrice = snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                   menuItem.productdate = snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                   menuItem.productName = snapshot.getString(FarmersModel.KEY_ITEM_NAME);
+                                   menuItem.productImage = snapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
+                                   menuItem.productDesciption = snapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
+                                   lists.add(menuItem);
+
+                                }
+                            }
+                            if(lists.size()>0){
+                                MenuListAdpater adpater=new MenuListAdpater(lists,this);
+                               binding.recyclerViewMenuItem.setAdapter(adpater);
+                                binding.recyclerViewMenuItem.setVisibility(View.VISIBLE);
+                             }
+
+                        }
+                    });
+
+        }
+
+    }
+
+
     private String getReadableDateTime(Date date){
 
         return new SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault()).format(date);
@@ -70,6 +171,7 @@ loadUserDetails();
     }
 
     private void getMenuList() {
+        binding.recyclerViewMenuItem.setVisibility(View.VISIBLE);
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
         firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION).get()
                 .addOnCompleteListener(task -> {

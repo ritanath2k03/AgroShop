@@ -77,6 +77,8 @@ getUsers();
     }
     private  void getUsers(){
         loading(true);
+        activityUserBinding.textErrormessage.setVisibility(View.INVISIBLE);
+        activityUserBinding.UsersRecyclerView.setVisibility(View.VISIBLE);
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 //        Toast.makeText(this, preferanceManager.getString(FarmersModel.KEY_DESIGNATION), Toast.LENGTH_SHORT).show();
         firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).get()
@@ -117,11 +119,11 @@ getUsers();
                             activityUserBinding.UsersRecyclerView.setVisibility(View.VISIBLE);
                             activityUserBinding.textErrormessage.setVisibility(View.INVISIBLE);
                         }else{
-                            showErrormessage();
+
                         }
                     }
                     else {
-                        showErrormessage();
+
                     }
                 });
     }
@@ -165,6 +167,7 @@ private void showErrormessage(){
 if(s.isEmpty()){getUsers();activityUserBinding.textErrormessage.setVisibility(View.INVISIBLE);}
 
         loading(true);
+        activityUserBinding.UsersRecyclerView.setVisibility(View.GONE);
         FirebaseFirestore database=FirebaseFirestore.getInstance();
         database.collection(FarmersModel.KEY_COLLECTION_USER)
                 .whereEqualTo(FarmersModel.KEY_DESIGNATION,s)

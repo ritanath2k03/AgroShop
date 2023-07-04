@@ -64,22 +64,27 @@ holder.setData(menuItems.get(position));
             super(eachMenuItemBinding.getRoot());
             binding=eachMenuItemBinding;
         }
-
+        int quentity = 0;
         public void setData(MenuItem menuItem) {
             preferanceManager=new PreferanceManager(itemView.getContext());
             binding.productName.setText(menuItem.productName);
-
+quentity=0;
             Picasso.get().load(menuItem.productImage).into(binding.PoductImage);
-            int quentity = 0;
+
             binding.poductNegetive.setOnClickListener(view -> {
-            getItemNumber(quentity-1);
-                Toast.makeText(view.getContext(), "Decrement", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), String.valueOf(quentity), Toast.LENGTH_SHORT).show();
+               if(quentity>0) {
+                    quentity--;
+                }
+                binding.productCount.setText(String.valueOf(quentity));
             });
             binding.productPosittive.setOnClickListener(view -> {
-               getItemNumber(quentity+1);
-                Toast.makeText(view.getContext(), "Increment", Toast.LENGTH_SHORT).show();
+              quentity++;
 
+                Toast.makeText(view.getContext(), String.valueOf(quentity), Toast.LENGTH_SHORT).show();
+                binding.productCount.setText(String.valueOf(quentity));
                });
+
             binding.productDescription.setText(menuItem.productDesciption);
             binding.productDate.setText(menuItem.productdate);
             binding.productAmount.setText("Rs."+menuItem.productPrice+"/kg");
@@ -141,9 +146,7 @@ holder.setData(menuItems.get(position));
         }
 
 
-        private void getItemNumber(int quentity) {
-       //get the item count for distributor
-        }
+
     }
 }
 

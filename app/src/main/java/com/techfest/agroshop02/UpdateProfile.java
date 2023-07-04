@@ -55,7 +55,7 @@ public class UpdateProfile extends AppCompatActivity {
         binding = ActivityUpdateProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferanceManager=new PreferanceManager(getApplicationContext());
-        binding.updateBtn.setVisibility(View.GONE);
+
         getImage();
      setListners();
 getUserData();
@@ -68,7 +68,7 @@ getUserData();
             @Override
             public void onActivityResult(Uri result) {
                 binding.editProfile.setImageURI(result);
-
+                Toast.makeText(UpdateProfile.this, "Wait Image Uploading..", Toast.LENGTH_SHORT).show();
                 final StorageReference storageReference = storage.getReference(FarmersModel.KEY_COLLECTION_USER).child(binding.emailEdit.getText().toString());
                 storageReference.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -78,6 +78,8 @@ getUserData();
                             public void onSuccess(Uri uri) {
                                 binding.updateBtn.setVisibility(View.VISIBLE);
                                 image =uri.toString();
+                                Toast.makeText(UpdateProfile.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+
                             }
                         });
                     }
@@ -90,8 +92,16 @@ getUserData();
     }
 
     private void getUserData() {
-      binding.emailEdit.setText(preferanceManager.getString(FarmersModel.KEY_EMAIL));
+        binding.nameEditText.setText(preferanceManager.getString(FarmersModel.KEY_USERNAME));
         Picasso.get().load(preferanceManager.getString(FarmersModel.KEY_PICTURE_URI)).into(binding.editProfile);
+              binding.emailEdit.setText(preferanceManager.getString(FarmersModel.KEY_EMAIL));
+              binding.ageEdit.setText(preferanceManager.getString(FarmersModel.KEY_PERSON_AGE));
+              binding.addressEdit.setText(preferanceManager.getString(FarmersModel.KEY_PERSON_LOCATION));
+             binding.phoneEdit.setText(preferanceManager.getString(FarmersModel.KEY_PHONE_NUMBER));
+              binding.bioEdit.setText(preferanceManager.getString(FarmersModel.KEY_PERSON_BIO));
+              image=preferanceManager.getString(FarmersModel.KEY_PICTURE_URI);
+              preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,image);
+
     }
 
     private void setListners() {
@@ -157,7 +167,7 @@ updatingmap.put(FarmersModel.KEY_PICTURE_URI,image);
                     binding.ageEdit.setText("");
                     binding.nameEditText.setText("");
                    binding.addressEdit.setText("");
-                   binding.updateBtn.setVisibility(View.GONE);
+
 
 
 
