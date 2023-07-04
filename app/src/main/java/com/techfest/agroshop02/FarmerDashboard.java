@@ -50,6 +50,13 @@ PreferanceManager preferanceManager;
         Log.d("Designation",preferanceManager.getString(FarmersModel.KEY_DESIGNATION));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDashboardData();
+
+    }
+
     private void addProductDetails() {
         HashMap<String,Object> menuMap=new HashMap<>();
         menuMap.put(FarmersModel.KEY_FARMER_ID,preferanceManager.getString(FarmersModel.KEY_USERID));
@@ -130,9 +137,9 @@ binding.addButton.setVisibility(View.VISIBLE);
     }
 
     private void setListners() {
-        binding.DashboardName.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),UpdateProfile.class));});
+        binding.EditProfileBtn.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),UpdateProfile.class));});
         binding.chat.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MainActivity.class));});
-        binding.EditProfileBtn.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MenuActivity.class));});
+        binding.Menulist.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MenuActivity.class));});
     }
 
     private void getDashboardData() {
@@ -165,6 +172,7 @@ binding.addButton.setVisibility(View.VISIBLE);
                                preferanceManager.putString(FarmersModel.KEY_EMAIL,queryDocumentSnapshot.getString(FarmersModel.KEY_EMAIL));
                                preferanceManager.putString(FarmersModel.KEY_PERSON_BIO,queryDocumentSnapshot.getString(FarmersModel.KEY_PERSON_BIO));
                                preferanceManager.putString(FarmersModel.KEY_PERSON_AGE,queryDocumentSnapshot.getString(FarmersModel.KEY_PERSON_AGE));
+                               preferanceManager.putString(FarmersModel.KEY_PICTURE_URI,queryDocumentSnapshot.getString(FarmersModel.KEY_PICTURE_URI));
                                preferanceManager.putString(FarmersModel.KEY_PERSON_LOCATION,queryDocumentSnapshot.getString(FarmersModel.KEY_PERSON_LOCATION));
                                preferanceManager.putString(FarmersModel.KEY_DESIGNATION,queryDocumentSnapshot.getString(FarmersModel.KEY_DESIGNATION));
                                setttingName(queryDocumentSnapshot);
@@ -188,10 +196,13 @@ binding.addButton.setVisibility(View.VISIBLE);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.DashboardMainLayout.setBackgroundColor(getColor(android.R.color.holo_green_light));
+                binding.DashboardProgressbar.setBackgroundColor(getColor(android.R.color.holo_green_light));
+                binding.MainLayout.setVisibility(View.VISIBLE);
             }
 
         }
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
+
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME));
             binding.AddproductLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -199,6 +210,10 @@ binding.addButton.setVisibility(View.VISIBLE);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.DashboardMainLayout.setBackgroundColor(getColor(android.R.color.holo_blue_bright));
+                binding.DashboardProgressbar.setBackgroundColor(getColor(android.R.color.holo_blue_bright));
+                binding.Menulist.setText("Check \nOrder");
+                binding.Menulist.setClickable(false);
+                binding.MainLayout.setVisibility(View.VISIBLE);
             }
 
         }
@@ -210,6 +225,9 @@ binding.addButton.setVisibility(View.VISIBLE);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.DashboardMainLayout.setBackgroundColor(getColor(android.R.color.holo_orange_light));
+                binding.DashboardProgressbar.setBackgroundColor(getColor(android.R.color.holo_orange_light));
+binding.MainLayout.setVisibility(View.VISIBLE);
+
             }
 
         }

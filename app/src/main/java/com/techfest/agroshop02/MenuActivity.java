@@ -2,6 +2,7 @@ package com.techfest.agroshop02;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -34,9 +35,17 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners{
         super.onCreate(savedInstanceState);
         binding=ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.swappableRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMenuList();
+
+            }
+        });
         preferanceManager=new PreferanceManager(getApplicationContext());
         getMenuList();
 loadUserDetails();
+
     }
     private String getReadableDateTime(Date date){
 
@@ -91,14 +100,16 @@ item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS)
                           else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor"))
                           { MenuItem item=new MenuItem();
 
-                              Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
-                              item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
-                              item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
-                              item.productId=queryDocumentSnapshot.getId();
-                              item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
-                              item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
-                              item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
-                              lists.add(item);
+                            if(queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS).matches("1")){
+                                Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
+                                item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
+                                item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
+                                item.productId=queryDocumentSnapshot.getId();
+                                item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
+                                item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
+                                item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                lists.add(item);
+                            }
                           }
                       }
                       if(lists.size()>0){
@@ -116,6 +127,7 @@ item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS)
                       }
                   }
                 });
+        binding.swappableRefresh.setRefreshing(false);
     }
 
     @Override

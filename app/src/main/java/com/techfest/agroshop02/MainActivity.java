@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
@@ -47,12 +49,26 @@ public class MainActivity extends BaseActivity implements ConversionListner {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         preferanceManager=new PreferanceManager(getApplicationContext());
         init();
         loadUserDetails();
 getToken();
 setListerner();
-listenConvertation();
+        listenConvertation();
+        binding.swappableRefreshMain.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listenConvertation();
+                binding.swappableRefreshMain.setRefreshing(false);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
     }
 
@@ -68,7 +84,7 @@ listenConvertation();
         binding.mainBack.setOnClickListener(view -> {   Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);startActivity(intent);});
-        binding.refresh.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),FarmerDashboard.class));});
+
     }
     private  void loadUserDetails(){
 
@@ -83,6 +99,7 @@ listenConvertation();
     }
 
     private void listenConvertation(){
+        conversation.clear();
         database.collection(FarmersModel.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
                 .addSnapshotListener(eventListener);
@@ -97,6 +114,7 @@ listenConvertation();
             return;
         }
         if(value!=null){
+
 
             for(DocumentChange documentChange:value.getDocumentChanges()){
                 if(documentChange.getType()==DocumentChange.Type.ADDED){
@@ -193,11 +211,5 @@ conversation.add(ChatMessage);
         startActivity(intent);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
 
-
-
-    }
 }

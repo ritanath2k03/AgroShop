@@ -152,6 +152,7 @@ listenmessages();
 
 
             }catch (Exception exception) {
+
                 showToast(exception.getMessage());
             }
         }
@@ -178,6 +179,7 @@ listenmessages();
                             if (responseJson.getInt("failure") ==1) {
                                 JSONObject error = (JSONObject) results.get(0);
                                 showToast(error.getString("error"));
+                                Log.d("Error",error.getString("error"));
                                 return;
                             }
                         }
@@ -194,6 +196,7 @@ listenmessages();
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 showToast(t.getMessage());
+
             }
         });
     }

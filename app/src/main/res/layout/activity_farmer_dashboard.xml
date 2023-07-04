@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/DashboardMainLayout"
+android:id="@+id/MainLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,15 +10,10 @@
     android:orientation="vertical"
     tools:context=".FarmerDashboard"
 
+
    >
 
-        <ProgressBar
-            android:id="@+id/DashboardProgressbar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
+
 
 
 
@@ -38,9 +33,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-
+        android:id="@+id/DashboardMainLayout"
         android:orientation="vertical">
-
+        <ProgressBar
+            android:id="@+id/DashboardProgressbar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:background="@color/black"
+            />
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="96dp"
@@ -227,6 +229,17 @@
                 tools:ignore="RtlCompat" />
         </LinearLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+android:background="@color/white"
+
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -235,42 +248,55 @@
             android:orientation="horizontal"
             android:textAlignment="center">
 
-            <Button
-                android:id="@+id/EditProfileBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Menu List"
-                android:textColor="@color/teal_200"
-                android:backgroundTint="@color/purple_700"
-                android:textSize="20dp" />
-            <Button
-            android:id="@+id/chat"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-                android:backgroundTint="@color/purple_200"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="   Chat   "
-            android:textSize="20dp" />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+               <Button
+                   android:id="@+id/EditProfileBtn"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="16dp"
+                   android:backgroundTint="@color/purple_700"
+                   android:text="Edit \nProfile"
+                   android:textColor="@color/teal_200"
+                   android:textSize="20dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintVertical_bias="0.0" />
+
+               <Button
+                   android:id="@+id/chat"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="12dp"
+                   android:backgroundTint="@color/purple_200"
+                   android:text="Chat"
+                   android:textSize="20dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@+id/EditProfileBtn"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintVertical_bias="0.0" />
+
+               <Button
+                   android:id="@+id/Menulist"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="4dp"
+                   android:backgroundTint="@color/teal_200"
+                   android:text="Menu\n List"
+                   android:textColor="@color/purple_700"
+                   android:textSize="20dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="0.508"
+                   app:layout_constraintStart_toEndOf="@+id/chat"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintVertical_bias="0.0" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-
-
-            android:orientation="vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
