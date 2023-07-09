@@ -47,6 +47,7 @@ PreferanceManager preferanceManager;
         setListners();
         addProductDetails();
         getImage();
+
         Log.d("Designation",preferanceManager.getString(FarmersModel.KEY_DESIGNATION));
     }
 
@@ -83,9 +84,11 @@ PreferanceManager preferanceManager;
 
                 menuMap.put(FarmersModel.KEY_ITEM_NAME,binding.productName.getText().toString());
                menuMap.put(FarmersModel.KEY_ITEM_PICTURE,image);
+               menuMap.put(FarmersModel.KEY_FARMER_LOCATION,preferanceManager.getString(FarmersModel.KEY_PERSON_LOCATION));
                 menuMap.put(FarmersModel.KEY_ITEM_DESCRIPTION,binding.productDescription.getText().toString());
                 menuMap.put(FarmersModel.KEY_ITEM_PRICE,binding.productPrice.getText().toString());
                 menuMap.put(FarmersModel.KEY_DESIGNATION,preferanceManager.getString(FarmersModel.KEY_DESIGNATION));
+                menuMap.put(FarmersModel.KEY_REMAINING_PRODUCT_QUANTITY,binding.productAvailableQuentity.getText().toString());
                 Log.d("Designation",preferanceManager.getString(FarmersModel.KEY_DESIGNATION));
                 firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION)
                         .add(menuMap).addOnCompleteListener(task -> {
@@ -93,7 +96,7 @@ PreferanceManager preferanceManager;
                             binding.productPrice.setText("");
                             binding.productName.setText("");
                             binding.productDescription.setText("");
-
+binding.productAvailableQuentity.setText("");
 
                         });
             }

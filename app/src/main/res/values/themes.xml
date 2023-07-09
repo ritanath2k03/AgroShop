@@ -4,7 +4,7 @@
         <!-- Customize your light theme here. -->
 
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/purple_200</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#FFCD1A</item>
         <item name="hintTextColor" tools:targetApi="l">@color/black</item>
 
     </style>
@@ -25,4 +25,43 @@
         <item name="hintTextColor" tools:targetApi="l">#FFFFFF</item>
 
     </style>
+    
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation" >@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation" >@anim/slide_out_bottom</item>
+    </style>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class FarmersModel {
 
     public static final String KEY_DISTRIBUTOR_ID = "distributorId";
+    public static final String ORDERID = "OrderId";
+    public static final String KEY_REMAINING_PRODUCT_QUANTITY = "remainingProductQuantity";
     String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
    public  static final String KEY_COLLECTION_USER="Users";
    public  static final String KEY_DNAME="DName";

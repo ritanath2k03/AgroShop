@@ -49,12 +49,11 @@ public class MainActivity extends BaseActivity implements ConversionListner {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         preferanceManager=new PreferanceManager(getApplicationContext());
         init();
         loadUserDetails();
-getToken();
-setListerner();
+        getToken();
+        setListerner();
         listenConvertation();
         binding.swappableRefreshMain.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -100,9 +99,11 @@ setListerner();
 
     private void listenConvertation(){
         conversation.clear();
+        //showing recent  conevrsation  for  the sender side
         database.collection(FarmersModel.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
                 .addSnapshotListener(eventListener);
+        //showing recent conversation for the receiver side
         database.collection(FarmersModel.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(FarmersModel.KEY_RECEIVER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
                 .addSnapshotListener(eventListener);
@@ -114,9 +115,8 @@ setListerner();
             return;
         }
         if(value!=null){
-
-
             for(DocumentChange documentChange:value.getDocumentChanges()){
+                //If new chat is added
                 if(documentChange.getType()==DocumentChange.Type.ADDED){
                     String senderId=documentChange.getDocument().getString(FarmersModel.KEY_SENDER_ID);
                     String receiverId=documentChange.getDocument().getString(FarmersModel.KEY_RECEIVER_ID);
@@ -130,7 +130,8 @@ if(preferanceManager.getString(FarmersModel.KEY_USERID).equals(senderId)){
     ChatMessage.conversionId=documentChange.getDocument().getString(FarmersModel.KEY_RECEIVER_ID);
     ChatMessage.conversionName=documentChange.getDocument().getString(FarmersModel.KEY_RECEIVER_NAME);
 
-}else{
+}
+else{
     ChatMessage.conversionImage=documentChange.getDocument().getString(FarmersModel.KEY_SENDER_IMAGE);
     ChatMessage.conversionId=documentChange.getDocument().getString(FarmersModel.KEY_SENDER_ID);
     ChatMessage.conversionName=documentChange.getDocument().getString(FarmersModel.KEY_SENDER_NAME);
@@ -140,6 +141,7 @@ if(preferanceManager.getString(FarmersModel.KEY_USERID).equals(senderId)){
         ChatMessage.dateObject=documentChange.getDocument().getDate(FarmersModel.KEY_TIMESTAMP);
 conversation.add(ChatMessage);
                 }
+                //If chat is modified
                 else if(documentChange.getType()==DocumentChange.Type.MODIFIED){
 
                     for(int i=0;i<conversation.size();i++){

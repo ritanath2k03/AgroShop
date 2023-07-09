@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">#D3293681</item>
         <item name="colorAccent">#A8752B</item>
     </style>
-    <style name="DialogAnimation">
+    <style name="animation">
         <item name="android:windowEnterAnimation">
             @anim/slide_in_bottom
         </item>

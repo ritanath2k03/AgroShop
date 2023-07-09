@@ -88,8 +88,16 @@ quentity=0;
             binding.productDescription.setText(menuItem.productDesciption);
             binding.productDate.setText(menuItem.productdate);
             binding.productAmount.setText("Rs."+menuItem.productPrice+"/kg");
-            binding.getRoot().setOnClickListener(v->{menuItemListners.onItemClicked(menuItem);});
+            binding.moreAbout.setOnClickListener(v->{
+                preferanceManager.putString(FarmersModel.ORDERID,menuItem.productId);
+                menuItemListners.onItemClicked(menuItem);});
             checkDesignation(menuItem);
+
+        }
+
+        private void getFarmerDetails() {
+
+
         }
 
         private void checkDesignation(MenuItem menuItem) {
@@ -135,12 +143,10 @@ quentity=0;
      else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor")) {
          binding.ckechout.setVisibility(View.VISIBLE);
          binding.AddingId.setVisibility(View.VISIBLE);
-
-
-
          binding.ckechout.setOnClickListener(view -> {
              Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_SHORT).show();
          });
+
 
      }
         }

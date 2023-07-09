@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="200dp"
     android:layout_margin="3dp"
-    android:background="@drawable/linear_layout_background">
+    android:background="@drawable/linear_layout_background"
+    >
 
     <Button
         android:id="@+id/ckechout"
@@ -136,7 +137,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="220dp"
         android:layout_height="80dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical"
         android:scrollbarSize="6dp"
         app:layout_constraintStart_toEndOf="@+id/PoductImage"
@@ -151,10 +152,24 @@
                 android:id="@+id/productDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textStyle="italic"
                 android:text="It is perfectly possible to parse* data from XML without caring about order, but it can be easier (e.g. when using SAX, I imagine, or when you're a lazy bastard writing very sloppy code) to parse if you assume a certain order. Although they should include some schema if they want a certain order, it's perfectly possible that their parser chokes on it anyway. Yes, they shouldn't do this, but obviously they don't care."
                 android:textColor="@color/purple_700"
                 app:layout_constraintStart_toEndOf="@+id/PoductImage"
                 app:layout_constraintTop_toBottomOf="@+id/productName" />
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/moreAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="More About.."
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:textStyle="italic|bold"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/PoductImage"
+        app:layout_constraintTop_toBottomOf="@+id/PoductImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

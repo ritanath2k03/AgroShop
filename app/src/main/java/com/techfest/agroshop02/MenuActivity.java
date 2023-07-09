@@ -5,21 +5,29 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.techfest.agroshop02.adapter.MenuListAdpater;
-import com.techfest.agroshop02.databinding.ActivityMainBinding;
 import com.techfest.agroshop02.databinding.ActivityMenuBinding;
+import com.techfest.agroshop02.databinding.BottomFarmerDetailsLayoutBinding;
 import com.techfest.agroshop02.listeners.MenuItemListners;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +39,8 @@ import Models.PreferanceManager;
 public class MenuActivity extends AppCompatActivity implements MenuItemListners {
     ActivityMenuBinding binding;
     PreferanceManager preferanceManager;
+    BottomFarmerDetailsLayoutBinding bottomsheetlayoutBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,59 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
         loadUserDetails();
         setListners();
 
+    }
+
+    private void getDialog(MenuItem menuItem) {
+        final Dialog dialog = new Dialog( this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_farmer_details_layout);
+        TextView farmernamelayout = dialog.findViewById(R.id.farmerName);
+        TextView farmerlocationlayout = dialog.findViewById(R.id.farmerLocation);
+        TextView availablequantitylayout = dialog.findViewById(R.id.availableQuantity);
+        TextView datelayout = dialog.findViewById(R.id.date);
+        TextView farmercontactnolayout = dialog.findViewById(R.id.farmerContact);
+        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+
+        firestore.collection(FarmersModel.KEY_MENU_COLLECTION).get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()&&task.getResult()!=null){
+                        for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
+                            if(queryDocumentSnapshot.getId().matches(menuItem.productId)){
+
+                                availablequantitylayout.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_REMAINING_PRODUCT_QUANTITY)+" TON");
+                                Log.d("AvailableProduct",queryDocumentSnapshot.getString(FarmersModel.KEY_REMAINING_PRODUCT_QUANTITY));
+                                 datelayout.setText(getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE)));
+                                 farmerlocationlayout.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_LOCATION));
+
+                                 FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+                                 firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).get()
+                                         .addOnCompleteListener(task1 -> {
+                                             if(task1.isSuccessful()&&task1.getResult()!=null){
+                                                 for(QueryDocumentSnapshot snapshot:task1.getResult()){
+                                                     if(snapshot.getId().matches(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID))){
+                                                         farmernamelayout.setText(snapshot.getString(FarmersModel.KEY_FNAME));
+                                                         farmercontactnolayout.setText(snapshot.getString(FarmersModel.KEY_PHONE_NUMBER));
+                                                         LinearLayout bottomView=dialog.findViewById(R.id.BottomMenuView);
+                                                         bottomView.setVisibility(View.VISIBLE);
+                                                     }
+                                                 }
+                                             }
+
+                                         });
+
+                                 }
+
+                        }
+
+
+                    }
+                });
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations =R.style.animation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
 
@@ -88,10 +151,10 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                             for(QueryDocumentSnapshot snapshot:task.getResult()){
                                 MenuItem menuItem=new MenuItem();
                                 if(snapshot.getString(FarmersModel.KEY_FARMER_ID).matches(currrntUser)){
+//                                    menuItem.productdate=snapshot.getString(FarmersModel.KEY_ITEM_DATE);
                                     menuItem.productStatus=snapshot.getString(FarmersModel.KEY_ITEM_STATUS);
                                     menuItem.productId=snapshot.getId();
                                     menuItem.productPrice=snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
-                                    menuItem.productdate=snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
                                     menuItem.productName=snapshot.getString(FarmersModel.KEY_ITEM_NAME);
                                    menuItem.productImage=snapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                                    menuItem.personDesignation=snapshot.getString(FarmersModel.KEY_DESIGNATION);
@@ -126,7 +189,7 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                    menuItem.productId = snapshot.getId();
                                    menuItem.personDesignation = snapshot.getString(FarmersModel.KEY_DESIGNATION);
                                    menuItem.productPrice = snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
-                                   menuItem.productdate = snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+//                                   menuItem.productdate = snapshot.getString(FarmersModel.KEY_ITEM_PRICE);
                                    menuItem.productName = snapshot.getString(FarmersModel.KEY_ITEM_NAME);
                                    menuItem.productImage = snapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                                    menuItem.productDesciption = snapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
@@ -190,7 +253,7 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                               item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                               item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                               item.productId=queryDocumentSnapshot.getId();
-item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS);
+                              item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS);
 
                               item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                               item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
@@ -203,14 +266,14 @@ item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS)
                           { MenuItem item=new MenuItem();
 
                             if(queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS).matches("1")){
-                                Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
+                                Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID));
                                 item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                                 item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                                 item.productId=queryDocumentSnapshot.getId();
                                 item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                                 item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                                 item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
-                                lists.add(item);
+                               lists.add(item);
                             }
                           }
                       }
@@ -234,8 +297,9 @@ item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS)
 
     @Override
     public void onItemClicked(MenuItem menuItem) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
         int count=0;
-
+        getDialog(menuItem);
     }
+
+
 }

@@ -236,10 +236,6 @@ FirebaseAuth auth=FirebaseAuth.getInstance();
                 .whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
                 .whereEqualTo(FarmersModel.KEY_RECEIVER_ID,receiverUser.id)
                 .addSnapshotListener(eventListener);
-//        firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT)
-//                .whereEqualTo(FarmersModel.KEY_SENDER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
-//                .whereEqualTo(FarmersModel.KEY_RECEIVER_ID,receiverUser.id)
-//                .addSnapshotListener(eventListener);
 
         firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_CHAT).whereEqualTo(FarmersModel.KEY_SENDER_ID,receiverUser.id)
                 .whereEqualTo(FarmersModel.KEY_RECEIVER_ID,preferanceManager.getString(FarmersModel.KEY_USERID))
