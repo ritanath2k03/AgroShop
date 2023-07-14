@@ -72,7 +72,6 @@ quentity=0;
             Picasso.get().load(menuItem.productImage).into(binding.PoductImage);
 
             binding.poductNegetive.setOnClickListener(view -> {
-                Toast.makeText(view.getContext(), String.valueOf(quentity), Toast.LENGTH_SHORT).show();
                if(quentity>0) {
                     quentity--;
                 }
@@ -81,7 +80,6 @@ quentity=0;
             binding.productPosittive.setOnClickListener(view -> {
               quentity++;
 
-                Toast.makeText(view.getContext(), String.valueOf(quentity), Toast.LENGTH_SHORT).show();
                 binding.productCount.setText(String.valueOf(quentity));
                });
 
