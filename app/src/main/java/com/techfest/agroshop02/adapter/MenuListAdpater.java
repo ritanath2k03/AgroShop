@@ -24,7 +24,7 @@ import Models.MenuItem;
 import Models.PreferanceManager;
 
 public class MenuListAdpater extends RecyclerView.Adapter<MenuListAdpater.MenuViewHolder> {
-
+    int quentity = 0;
     private final List<MenuItem> menuItems;
     private final MenuItemListners menuItemListners;
     PreferanceManager preferanceManager;
@@ -64,7 +64,7 @@ holder.setData(menuItems.get(position));
             super(eachMenuItemBinding.getRoot());
             binding=eachMenuItemBinding;
         }
-        int quentity = 0;
+
         public void setData(MenuItem menuItem) {
             preferanceManager=new PreferanceManager(itemView.getContext());
             binding.productName.setText(menuItem.productName);
@@ -85,11 +85,12 @@ quentity=0;
 
             binding.productDescription.setText(menuItem.productDesciption);
             binding.productDate.setText(menuItem.productdate);
-            binding.productAmount.setText("Rs."+menuItem.productPrice+"/kg");
+            binding.productAmount.setText("Rs."+menuItem.productPrice+"/TON");
             binding.moreAbout.setOnClickListener(v->{
                 preferanceManager.putString(FarmersModel.ORDERID,menuItem.productId);
                 menuItemListners.onItemClicked(menuItem);});
             checkDesignation(menuItem);
+           
 
         }
 
@@ -103,35 +104,35 @@ quentity=0;
          Log.d("ProductStatus",menuItem.productStatus);
 
          if(menuItem.productStatus.matches("0")){
-                 binding.ckechout.setText("Available");
-                 binding.ckechout.setBackgroundColor(Color.GREEN);
-                 binding.ckechout.setVisibility(View.VISIBLE);
+                 binding.checkout.setText("Available");
+                 binding.checkout.setBackgroundColor(Color.GREEN);
+                 binding.checkout.setVisibility(View.VISIBLE);
              }
              else if(menuItem.productStatus.matches("1")){
-                 binding.ckechout.setBackgroundColor(Color.RED);
-                 binding.ckechout.setText("UnAvailable");
-                 binding.ckechout.setVisibility(View.VISIBLE);
+                 binding.checkout.setBackgroundColor(Color.RED);
+                 binding.checkout.setText("UnAvailable");
+                 binding.checkout.setVisibility(View.VISIBLE);
              }
 
              final int[] status = {0};
 
-       binding.ckechout.setOnClickListener(view -> {
+       binding.checkout.setOnClickListener(view -> {
            if(menuItem.personDesignation.matches("Farmer")&&(menuItem.productStatus.matches("1")))
            {
 
-               binding.ckechout.setText("Available");
+               binding.checkout.setText("Available");
                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"Available");
                status[0] +=1;
-               binding.ckechout.setBackgroundColor(Color.GREEN);
+               binding.checkout.setBackgroundColor(Color.GREEN);
                FirebaseFirestore  firebaseFirestore=FirebaseFirestore.getInstance();
                firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION).document(menuItem.productId).update(FarmersModel.KEY_ITEM_STATUS,"0");
 
            }else if(menuItem.personDesignation.matches("Farmer")&&(menuItem.productStatus.matches("0")))
            {
-               binding.ckechout.setText("UnAvailable");
+               binding.checkout.setText("UnAvailable");
                status[0] -=1;
                preferanceManager.putString(FarmersModel.KEY_ITEM_STATUS,"UnAvailable");
-               binding.ckechout.setBackgroundColor(Color.RED);
+               binding.checkout.setBackgroundColor(Color.RED);
                FirebaseFirestore  firebaseFirestore=FirebaseFirestore.getInstance();
                firebaseFirestore.collection(FarmersModel.KEY_MENU_COLLECTION).document(menuItem.productId).update(FarmersModel.KEY_ITEM_STATUS,"1");
            }
@@ -139,10 +140,10 @@ quentity=0;
 
      }
      else if (preferanceManager.getString(FarmersModel.KEY_DESIGNATION).matches("Distributor")) {
-         binding.ckechout.setVisibility(View.VISIBLE);
+         binding.checkout.setVisibility(View.VISIBLE);
          binding.AddingId.setVisibility(View.VISIBLE);
-         binding.ckechout.setOnClickListener(view -> {
-             Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+         binding.checkout.setOnClickListener(view -> {
+             menuItemListners.onItemSelected(menuItem,quentity,menuItem.productName,menuItem.productPrice,menuItem.productId);
          });
 
 
