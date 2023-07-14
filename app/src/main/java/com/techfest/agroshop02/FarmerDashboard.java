@@ -96,7 +96,7 @@ PreferanceManager preferanceManager;
                             binding.productPrice.setText("");
                             binding.productName.setText("");
                             binding.productDescription.setText("");
-binding.productAvailableQuentity.setText("");
+                            binding.productAvailableQuentity.setText("");
 
                         });
             }
@@ -194,6 +194,7 @@ binding.addButton.setVisibility(View.VISIBLE);
 
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME));
+            preferanceManager.putString(FarmersModel.KEY_FARMER_NAME, queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_green_dark));
             }
@@ -207,6 +208,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
 
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME));
+            preferanceManager.putString(FarmersModel.KEY_CNAME, queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME));
             binding.AddproductLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_blue_dark));
@@ -222,6 +224,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         }
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME));
+            preferanceManager.putString(FarmersModel.KEY_DISTRIBUTOR_NAME, queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME));
             binding.AddproductLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_orange_dark));
@@ -234,6 +237,7 @@ binding.MainLayout.setVisibility(View.VISIBLE);
             }
 
         }
+
     }
 
     private  void loading(Boolean isLoading){
