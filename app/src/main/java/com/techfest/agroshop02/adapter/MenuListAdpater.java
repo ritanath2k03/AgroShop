@@ -1,12 +1,10 @@
 package com.techfest.agroshop02.adapter;
 
 import android.graphics.Color;
-import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +15,6 @@ import com.techfest.agroshop02.databinding.EachMenuItemBinding;
 import com.techfest.agroshop02.listeners.MenuItemListners;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import Models.FarmersModel;
 import Models.MenuItem;
@@ -36,7 +33,7 @@ public class MenuListAdpater extends RecyclerView.Adapter<MenuListAdpater.MenuVi
 
     @NonNull
     @Override
-    public MenuListAdpater.MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
      EachMenuItemBinding eachMenuItemBinding=EachMenuItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
 
      return new MenuViewHolder(eachMenuItemBinding);
@@ -68,7 +65,7 @@ holder.setData(menuItems.get(position));
         public void setData(MenuItem menuItem) {
             preferanceManager=new PreferanceManager(itemView.getContext());
             binding.productName.setText(menuItem.productName);
-quentity=0;
+            quentity=0;
             Picasso.get().load(menuItem.productImage).into(binding.PoductImage);
 
             binding.poductNegetive.setOnClickListener(view -> {
