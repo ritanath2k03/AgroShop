@@ -7,6 +7,16 @@ public class FarmersModel {
     public static final String KEY_DISTRIBUTOR_ID = "distributorId";
     public static final String ORDERID = "OrderId";
     public static final String KEY_REMAINING_PRODUCT_QUANTITY = "remainingProductQuantity";
+    public static final String ORDER_QUANTITY = "orderQuantity";
+    public static final String KEY_FARMER_PHONENUMBER ="farmerPhoneNumber" ;
+    public static final String KEY_DISTRIBUTOR_PHONE_NUMBER = "distributorPhoneNumber";
+    public static final String KEY_DISTRIBUTOR_LOCATION = "distributorLocation";
+    public static final String KEY_PRODUCT_ID ="selectedProductId" ;
+    public static final String KEY_FARMER_NAME = "farmerName";
+    public static final String KEY_DISTRIBUTOR_NAME = "distributorName";
+    public static final String KEY_ORDER_COLLECTION = "OrderCollection";
+    public static final String TOTAL_ORDER_AMOUNT ="totalAmount" ;
+    public static final String ORDER_STATUS = "OrderStatus";
     String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
    public  static final String KEY_COLLECTION_USER="Users";
    public  static final String KEY_DNAME="DName";

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/linear_layout_background"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Name:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Rahul Pal"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Location:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dLocation"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Naskarhat,700039,bksfkashfakbbsfakfbasjfb"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Phone Number:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dPhoneNumber"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="9153010684"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Product Name:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dItemName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Potato"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Quantity:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dQuantity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="10 Ton"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Total Amount:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dAmount"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="20000"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="Order Requested:"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+      <TextView
+          android:id="@+id/dRequested"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginRight="6dp"
+          android:text="15 July,2023"
+          android:textStyle="bold"
+          android:textSize="18sp" />
+   </LinearLayout>
+
+   <Button
+       android:id="@+id/StatusButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Dispatched"
+       android:textStyle="bold"
+       android:layout_gravity="right"
+       android:layout_marginRight="10dp"/>
+
+
+</LinearLayout>

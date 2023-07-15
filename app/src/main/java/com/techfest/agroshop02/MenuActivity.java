@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.techfest.agroshop02.adapter.MenuListAdpater;
@@ -81,6 +81,7 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                 Log.d("AvailableProduct",queryDocumentSnapshot.getString(FarmersModel.KEY_REMAINING_PRODUCT_QUANTITY));
                                  datelayout.setText(getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE)));
                                  farmerlocationlayout.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_LOCATION));
+                                 preferanceManager.putString(FarmersModel.KEY_FARMER_LOCATION, queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_LOCATION));
 
                                  FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
                                  firebaseFirestore.collection(FarmersModel.KEY_COLLECTION_USER).get()
@@ -89,7 +90,10 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                                  for(QueryDocumentSnapshot snapshot:task1.getResult()){
                                                      if(snapshot.getId().matches(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID))){
                                                          farmernamelayout.setText(snapshot.getString(FarmersModel.KEY_FNAME));
+                                                         preferanceManager.putString(FarmersModel.KEY_FARMER_NAME,snapshot.getString(FarmersModel.KEY_FNAME));
+                                                         preferanceManager.putString(FarmersModel.KEY_FARMER_ID,queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID));
                                                          farmercontactnolayout.setText(snapshot.getString(FarmersModel.KEY_PHONE_NUMBER));
+                                                         preferanceManager.putString(FarmersModel.KEY_FARMER_PHONENUMBER,snapshot.getString(FarmersModel.KEY_PHONE_NUMBER));
                                                          LinearLayout bottomView=dialog.findViewById(R.id.BottomMenuView);
                                                          bottomView.setVisibility(View.VISIBLE);
                                                      }
@@ -164,8 +168,8 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                 }
                             }
                             if(lists.size()>0) {
-                           MenuListAdpater adpater = new MenuListAdpater(lists, this);
-                           binding.recyclerViewMenuItem.setAdapter(adpater);
+                           MenuListAdpater adapter = new MenuListAdpater(lists, this);
+                           binding.recyclerViewMenuItem.setAdapter(adapter);
                                 binding.recyclerViewMenuItem.setVisibility(View.VISIBLE);
  }
 
@@ -241,20 +245,18 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                     List<MenuItem> lists=new ArrayList<>();
                   String currentUser=preferanceManager.getString(FarmersModel.KEY_USERID);
                   if(task.isSuccessful()&&task.getResult()!=null){
-
                       lists.clear();
                       for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
                           Log.d("UserId",preferanceManager.getString(FarmersModel.KEY_USERID));
                           if(currentUser.matches(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID)))
-                          { MenuItem item=new MenuItem();
+                          {
+                              MenuItem item=new MenuItem();
+
                               Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
-
-
                               item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                               item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                               item.productId=queryDocumentSnapshot.getId();
                               item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS);
-
                               item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                               item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                               item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
@@ -273,6 +275,8 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                 item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                                 item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                                 item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
+                                preferanceManager.putString(FarmersModel.KEY_ITEM_NAME,item.productName);
+                                preferanceManager.putString(FarmersModel.KEY_ITEM_PRICE,item.productPrice);
                                lists.add(item);
                             }
                           }
@@ -280,10 +284,10 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                       if(lists.size()>0){
                           LinearLayoutManager llm=new LinearLayoutManager(this);
                           llm.setOrientation(LinearLayoutManager.VERTICAL);
-                          MenuListAdpater adpater=new MenuListAdpater(lists,this);
+                          MenuListAdpater adapter=new MenuListAdpater(lists,this);
                           binding.recyclerViewMenuItem.setLayoutManager(llm);
                           binding.recyclerViewMenuItem.setHasFixedSize(true);
-                          binding.recyclerViewMenuItem.setAdapter(adpater);
+                          binding.recyclerViewMenuItem.setAdapter(adapter);
 
 
                       }
@@ -298,8 +302,18 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
     @Override
     public void onItemClicked(MenuItem menuItem) {
         int count=0;
+
         getDialog(menuItem);
     }
 
+    @Override
+    public void onItemSelected(MenuItem menuItem, int quentity, String productName, String productPrice, String productId) {
+        preferanceManager.putString(FarmersModel.ORDER_QUANTITY,String.valueOf(quentity));
+        preferanceManager.putString(FarmersModel.KEY_ITEM_NAME,productName);
+        preferanceManager.putString(FarmersModel.KEY_ITEM_PRICE,productPrice);
+preferanceManager.putString(FarmersModel.KEY_PRODUCT_ID,productId);
+if (quentity>0)startActivity(new Intent(getApplicationContext(),CartActivity.class));
 
+
+    }
 }

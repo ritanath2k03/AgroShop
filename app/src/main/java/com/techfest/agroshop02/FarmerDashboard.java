@@ -96,7 +96,7 @@ PreferanceManager preferanceManager;
                             binding.productPrice.setText("");
                             binding.productName.setText("");
                             binding.productDescription.setText("");
-binding.productAvailableQuentity.setText("");
+                            binding.productAvailableQuentity.setText("");
 
                         });
             }
@@ -125,7 +125,7 @@ binding.productAvailableQuentity.setText("");
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-binding.addButton.setVisibility(View.VISIBLE);
+                                binding.addButton.setVisibility(View.VISIBLE);
 
                                 image =uri.toString();
                             }
@@ -143,6 +143,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         binding.EditProfileBtn.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),UpdateProfile.class));});
         binding.chat.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MainActivity.class));});
         binding.Menulist.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MenuActivity.class));});
+        binding.OrderList.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(), Order.class));});
     }
 
     private void getDashboardData() {
@@ -194,6 +195,7 @@ binding.addButton.setVisibility(View.VISIBLE);
 
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME)!=null){
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME));
+            preferanceManager.putString(FarmersModel.KEY_FARMER_NAME, queryDocumentSnapshot.getString(FarmersModel.KEY_FNAME));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_green_dark));
             }
@@ -207,6 +209,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME)!=null){
 
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME));
+            preferanceManager.putString(FarmersModel.KEY_CNAME, queryDocumentSnapshot.getString(FarmersModel.KEY_CNAME));
             binding.AddproductLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_blue_dark));
@@ -222,6 +225,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         }
         if(queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME)!=null){
             binding.DashboardName.setText(queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME));
+            preferanceManager.putString(FarmersModel.KEY_DISTRIBUTOR_NAME, queryDocumentSnapshot.getString(FarmersModel.KEY_DNAME));
             binding.AddproductLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setStatusBarColor(getColor(android.R.color.holo_orange_dark));
@@ -229,11 +233,12 @@ binding.addButton.setVisibility(View.VISIBLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.DashboardMainLayout.setBackgroundColor(getColor(android.R.color.holo_orange_light));
                 binding.DashboardProgressbar.setBackgroundColor(getColor(android.R.color.holo_orange_light));
-binding.MainLayout.setVisibility(View.VISIBLE);
+                binding.MainLayout.setVisibility(View.VISIBLE);
 
             }
 
         }
+
     }
 
     private  void loading(Boolean isLoading){
@@ -244,5 +249,6 @@ binding.MainLayout.setVisibility(View.VISIBLE);
             binding.DashboardProgressbar.setVisibility(View.INVISIBLE);
         }
     }
+
 
 }
