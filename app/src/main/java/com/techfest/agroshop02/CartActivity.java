@@ -59,8 +59,10 @@ preferanceManager=new PreferanceManager(getApplicationContext());
         map.put(FarmersModel.KEY_PRODUCT_ID,preferanceManager.getString(FarmersModel.KEY_PRODUCT_ID));
         map.put(FarmersModel.ORDER_QUANTITY,preferanceManager.getString(FarmersModel.ORDER_QUANTITY));
         map.put(FarmersModel.ORDERID,null);
-        map.put(FarmersModel.TOTAL_ORDER_AMOUNT,preferanceManager.getString(FarmersModel.TOTAL_ORDER_AMOUNT));
 
+        map.put(FarmersModel.KEY_ITEM_NAME,preferanceManager.getString(FarmersModel.KEY_ITEM_NAME));
+        map.put(FarmersModel.TOTAL_ORDER_AMOUNT,preferanceManager.getString(FarmersModel.TOTAL_ORDER_AMOUNT));
+map.put(FarmersModel.ORDER_STATUS,null);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).add(map).addOnCompleteListener(task -> {
@@ -75,10 +77,13 @@ preferanceManager=new PreferanceManager(getApplicationContext());
                 map.put(FarmersModel.KEY_FARMER_LOCATION,preferanceManager.getString(FarmersModel.KEY_FARMER_LOCATION));
                 map.put(FarmersModel.KEY_DISTRIBUTOR_LOCATION,preferanceManager.getString(FarmersModel.KEY_PERSON_LOCATION));
                 map.put(FarmersModel.KEY_ITEM_DATE,new Date());
+                map.put(FarmersModel.KEY_ITEM_NAME,preferanceManager.getString(FarmersModel.KEY_ITEM_NAME));
                 map.put(FarmersModel.KEY_PRODUCT_ID,preferanceManager.getString(FarmersModel.KEY_PRODUCT_ID));
                 map.put(FarmersModel.ORDER_QUANTITY,preferanceManager.getString(FarmersModel.ORDER_QUANTITY));
                 map.put(FarmersModel.TOTAL_ORDER_AMOUNT,preferanceManager.getString(FarmersModel.TOTAL_ORDER_AMOUNT));
                 map.put(FarmersModel.ORDERID,task.getResult().getId());
+                preferanceManager.putString(FarmersModel.ORDERID,task.getResult().getId());
+                map.put(FarmersModel.ORDER_STATUS,String.valueOf(1));
                 firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).document(task.getResult().getId())
                          .update(map);
                 Intent intent=new Intent(getApplicationContext(),MenuActivity.class);

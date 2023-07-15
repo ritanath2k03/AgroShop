@@ -168,8 +168,8 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                 }
                             }
                             if(lists.size()>0) {
-                           MenuListAdpater adpater = new MenuListAdpater(lists, this);
-                           binding.recyclerViewMenuItem.setAdapter(adpater);
+                           MenuListAdpater adapter = new MenuListAdpater(lists, this);
+                           binding.recyclerViewMenuItem.setAdapter(adapter);
                                 binding.recyclerViewMenuItem.setVisibility(View.VISIBLE);
  }
 
@@ -245,20 +245,18 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                     List<MenuItem> lists=new ArrayList<>();
                   String currentUser=preferanceManager.getString(FarmersModel.KEY_USERID);
                   if(task.isSuccessful()&&task.getResult()!=null){
-
                       lists.clear();
                       for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
                           Log.d("UserId",preferanceManager.getString(FarmersModel.KEY_USERID));
                           if(currentUser.matches(queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_ID)))
-                          { MenuItem item=new MenuItem();
+                          {
+                              MenuItem item=new MenuItem();
+
                               Log.d("ItemName",queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME));
-
-
                               item.productdate=getReadableDateTime(queryDocumentSnapshot.getDate(FarmersModel.KEY_ITEM_DATE));
                               item.productDesciption=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_DESCRIPTION);
                               item.productId=queryDocumentSnapshot.getId();
                               item.productStatus=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_STATUS);
-
                               item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                               item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                               item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
@@ -277,7 +275,6 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                                 item.productImage=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PICTURE);
                                 item.productName=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
                                 item.productPrice=queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_PRICE);
-
                                 preferanceManager.putString(FarmersModel.KEY_ITEM_NAME,item.productName);
                                 preferanceManager.putString(FarmersModel.KEY_ITEM_PRICE,item.productPrice);
                                lists.add(item);
@@ -287,10 +284,10 @@ public class MenuActivity extends AppCompatActivity implements MenuItemListners 
                       if(lists.size()>0){
                           LinearLayoutManager llm=new LinearLayoutManager(this);
                           llm.setOrientation(LinearLayoutManager.VERTICAL);
-                          MenuListAdpater adpater=new MenuListAdpater(lists,this);
+                          MenuListAdpater adapter=new MenuListAdpater(lists,this);
                           binding.recyclerViewMenuItem.setLayoutManager(llm);
                           binding.recyclerViewMenuItem.setHasFixedSize(true);
-                          binding.recyclerViewMenuItem.setAdapter(adpater);
+                          binding.recyclerViewMenuItem.setAdapter(adapter);
 
 
                       }

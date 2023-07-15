@@ -125,7 +125,7 @@ PreferanceManager preferanceManager;
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-binding.addButton.setVisibility(View.VISIBLE);
+                                binding.addButton.setVisibility(View.VISIBLE);
 
                                 image =uri.toString();
                             }
@@ -143,6 +143,7 @@ binding.addButton.setVisibility(View.VISIBLE);
         binding.EditProfileBtn.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),UpdateProfile.class));});
         binding.chat.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MainActivity.class));});
         binding.Menulist.setOnClickListener(view -> {startActivity(new Intent(getApplicationContext(),MenuActivity.class));});
+        binding.OrderList.setOnClickListener(v -> {startActivity(new Intent(getApplicationContext(), Order.class));});
     }
 
     private void getDashboardData() {
@@ -232,7 +233,7 @@ binding.addButton.setVisibility(View.VISIBLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.DashboardMainLayout.setBackgroundColor(getColor(android.R.color.holo_orange_light));
                 binding.DashboardProgressbar.setBackgroundColor(getColor(android.R.color.holo_orange_light));
-binding.MainLayout.setVisibility(View.VISIBLE);
+                binding.MainLayout.setVisibility(View.VISIBLE);
 
             }
 
@@ -248,5 +249,6 @@ binding.MainLayout.setVisibility(View.VISIBLE);
             binding.DashboardProgressbar.setVisibility(View.INVISIBLE);
         }
     }
+
 
 }
