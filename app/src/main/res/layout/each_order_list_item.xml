@@ -190,10 +190,9 @@
           android:id="@+id/StatusButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="right"
           android:layout_marginRight="10dp"
           android:text="None"
-          android:layout_marginLeft="80dp"
+          android:layout_marginLeft="60dp"
           android:textStyle="bold" />
    </LinearLayout>
 
