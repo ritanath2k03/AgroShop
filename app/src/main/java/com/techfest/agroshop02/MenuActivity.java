@@ -316,4 +316,12 @@ if (quentity>0)startActivity(new Intent(getApplicationContext(),CartActivity.cla
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(),FarmerDashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+    }
 }

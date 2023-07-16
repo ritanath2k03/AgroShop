@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,18 +45,26 @@ setListners();
         });
 
         preferanceManager = new PreferanceManager(getApplicationContext());
-
+        preferanceManager.putString(FarmersModel.CURRENT_USER_LIST,String.valueOf(1));
         getOrderList();
 
 
     }
 
     private void setListners() {
-        binding.currentOrder.setOnClickListener(v -> {getOrderList();});
-        binding.previousOrder.setOnClickListener(v -> {getPreviousOrderList();});
+        binding.currentOrder.setOnClickListener(v -> {getOrderList();
+        preferanceManager.putString(FarmersModel.CURRENT_USER_LIST,String.valueOf(1));
+        });
+        binding.previousOrder.setOnClickListener(v -> {getPreviousOrderList();
+        preferanceManager.putString(FarmersModel.CURRENT_USER_LIST,String.valueOf(2));
+        });
     }
 
     private void getOrderList() {
+
+        binding.previousOrder.setBackgroundColor(Color.parseColor("#FFCD1A"));
+        binding.currentOrder.setBackgroundColor(Color.CYAN);
+
         binding.recyclerViewOrderItem.setVisibility(View.VISIBLE);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).get()
@@ -90,15 +99,22 @@ setListners();
 
                         }
                         else {
+                            binding.previousOrder.setBackgroundColor(Color.parseColor("#FFCD1A"));
+                            binding.currentOrder.setBackgroundColor(Color.parseColor("#FFCD1A"));
+                            preferanceManager.putString(FarmersModel.CURRENT_USER_LIST,String.valueOf(1));
                             Toast.makeText(this, "Empty Order List", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                 });
 
         binding.swappableRefresh.setRefreshing(false);
 
     }
     private void getPreviousOrderList() {
+        binding.currentOrder.setBackgroundColor(Color.parseColor("#FFCD1A"));
+        binding.previousOrder.setBackgroundColor(Color.CYAN);
+
         binding.recyclerViewOrderItem.setVisibility(View.VISIBLE);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).get()
@@ -133,6 +149,9 @@ setListners();
 
                         }
                         else {
+                            binding.previousOrder.setBackgroundColor(Color.parseColor("#FFCD1A"));
+                            binding.currentOrder.setBackgroundColor(Color.CYAN);
+                            preferanceManager.putString(FarmersModel.CURRENT_USER_LIST,String.valueOf(1));
                             Toast.makeText(this, "Empty Order List", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -166,7 +185,8 @@ setListners();
             item.distributorName = queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_NAME);
             item.distributorLocation = queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_LOCATION);
             item.distributorPhoneNumber = queryDocumentSnapshot.getString(FarmersModel.KEY_FARMER_PHONENUMBER);
-            item.distributorProductName = queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
+
+            item.ProductName = queryDocumentSnapshot.getString(FarmersModel.KEY_ITEM_NAME);
             item.distributorQuantity = queryDocumentSnapshot.getString(FarmersModel.ORDER_QUANTITY);
             item.distributorAmount = queryDocumentSnapshot.getString(FarmersModel.TOTAL_ORDER_AMOUNT);
             item.orderStatus=queryDocumentSnapshot.getString(FarmersModel.ORDER_STATUS);

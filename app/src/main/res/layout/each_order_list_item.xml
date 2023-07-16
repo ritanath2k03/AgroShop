@@ -22,6 +22,7 @@
           android:text="Name:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dName"
           android:layout_width="wrap_content"
@@ -29,9 +30,9 @@
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="Rahul Pal"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="None"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
 
    <LinearLayout
@@ -49,6 +50,7 @@
           android:text="Location:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dLocation"
           android:layout_width="wrap_content"
@@ -56,9 +58,9 @@
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="Naskarhat,700039,bksfkashfakbbsfakfbasjfb"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="None"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -75,6 +77,7 @@
           android:text="Phone Number:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dPhoneNumber"
           android:layout_width="wrap_content"
@@ -82,9 +85,9 @@
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="9153010684"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="empty"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -101,6 +104,7 @@
           android:text="Product Name:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dItemName"
           android:layout_width="wrap_content"
@@ -108,9 +112,9 @@
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="Potato"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="None"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -127,6 +131,7 @@
           android:text="Quantity:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dQuantity"
           android:layout_width="wrap_content"
@@ -134,9 +139,9 @@
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="10 Ton"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="104Ton"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -153,16 +158,17 @@
           android:text="Total Amount:"
           android:textColor="@color/black"
           android:textSize="18sp" />
+
       <TextView
           android:id="@+id/dAmount"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_height="30dp"
           android:layout_marginLeft="10dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="20000"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:text="4"
+          android:textSize="18sp"
+          android:textStyle="bold" />
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
@@ -176,29 +182,22 @@
           android:layout_marginLeft="6dp"
           android:layout_marginTop="6dp"
           android:layout_marginRight="6dp"
-          android:text="Order Requested:"
+          android:text="Order Status:"
           android:textColor="@color/black"
           android:textSize="18sp" />
-      <TextView
-          android:id="@+id/dRequested"
+
+      <Button
+          android:id="@+id/StatusButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginTop="6dp"
-          android:layout_marginRight="6dp"
-          android:text="15 July,2023"
-          android:textStyle="bold"
-          android:textSize="18sp" />
+          android:layout_gravity="right"
+          android:layout_marginRight="10dp"
+          android:text="None"
+          android:layout_marginLeft="80dp"
+          android:textStyle="bold" />
    </LinearLayout>
 
-   <Button
-       android:id="@+id/StatusButton"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Dispatched"
-       android:textStyle="bold"
-       android:layout_gravity="right"
-       android:layout_marginRight="10dp"/>
+
 
 
 </LinearLayout>

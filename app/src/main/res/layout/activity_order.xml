@@ -40,6 +40,7 @@
             android:id="@+id/recyclerViewOrderItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_marginTop="180dp"
             android:overScrollMode="never"
             android:layout_marginLeft="15dp"
@@ -48,7 +49,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <Button
+        <TextView
 
             android:id="@+id/currentOrder"
             android:layout_width="wrap_content"
@@ -57,17 +58,24 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="7dp"
             android:paddingBottom="10dp"
+            android:background="#FFCD1A"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="Current Orders"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:ignore="MissingConstraints" />
 
-        <Button
+        <TextView
             android:id="@+id/previousOrder"
             android:layout_width="wrap_content"
             android:layout_marginRight="7dp"
             android:layout_height="wrap_content"
-
+            android:background="#FFCD1A"
+            android:paddingLeft="5dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp"
             android:layout_marginTop="20dp"
             android:text="Previous Orders"
             app:layout_constraintEnd_toEndOf="parent"

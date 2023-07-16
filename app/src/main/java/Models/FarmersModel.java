@@ -17,6 +17,7 @@ public class FarmersModel {
     public static final String KEY_ORDER_COLLECTION = "OrderCollection";
     public static final String TOTAL_ORDER_AMOUNT ="totalAmount" ;
     public static final String ORDER_STATUS = "OrderStatus";
+    public static final String CURRENT_USER_LIST = "ClickStatus";
     String Id,Name,Location,Time,PictureUri,Phone,Email,Password,Designation;
    public  static final String KEY_COLLECTION_USER="Users";
    public  static final String KEY_DNAME="DName";

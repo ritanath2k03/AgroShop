@@ -60,13 +60,14 @@ holder.setData(itemList.get(position));
 
         public void setData(OrderItem orderItem) {
             preferanceManager = new PreferanceManager(itemView.getContext());
-            binding.dItemName.setText(orderItem.ProductName);
+
             quantity=0;
             binding.dLocation.setText(orderItem.distributorLocation);
             binding.dPhoneNumber.setText(orderItem.distributorPhoneNumber);
             binding.dAmount.setText(orderItem.distributorAmount);
-            binding.dRequested.setText(orderItem.distributorOrder);
             binding.dQuantity.setText(orderItem.distributorQuantity);
+            binding.dName.setText(orderItem.distributorName);
+            binding.dItemName.setText(orderItem.ProductName);
             getStatus(orderItem);
         }
 
@@ -89,10 +90,15 @@ holder.setData(itemList.get(position));
         }
 
         private void distributorOperation(OrderItem orderItem) {
-            if(orderItem.orderStatus.matches("1")) binding.StatusButton.setText("CONFIRMED");
-            else if (orderItem.orderStatus.matches("2")) {
+            if(orderItem.orderStatus.matches("1")) {
+
+                binding.StatusButton.setBackgroundColor(Color.argb(255,201,108,100));
+                binding.StatusButton.setText("CONFIRMED");
+            }          else if (orderItem.orderStatus.matches("2")) {
                 binding.StatusButton.setText("DISPATCHED");
+                binding.StatusButton.setBackgroundColor(Color.argb(255,101,148,200));
             } else if (orderItem.orderStatus.matches("3")) {
+                binding.StatusButton.setBackgroundColor(Color.GRAY);
                 binding.StatusButton.setText("DELIVERED");
             }
 
@@ -100,6 +106,7 @@ holder.setData(itemList.get(position));
 
         private void farmerOperation(OrderItem orderItem) {
             binding.StatusButton.setBackgroundColor(Color.GRAY);
+
             if(orderItem.orderStatus.matches("1")) {
                 binding.StatusButton.setBackgroundColor(Color.argb(255,201,108,100));
                 binding.StatusButton.setText("Yet to \n Dispatched");

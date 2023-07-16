@@ -22,14 +22,14 @@ import kotlin.jvm.internal.PackageReference;
 public class CartActivity extends AppCompatActivity {
 
     ActivityCartBinding binding;
-PreferanceManager preferanceManager;
+    PreferanceManager preferanceManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-preferanceManager=new PreferanceManager(getApplicationContext());
+        preferanceManager=new PreferanceManager(getApplicationContext());
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getData();
@@ -62,7 +62,7 @@ preferanceManager=new PreferanceManager(getApplicationContext());
 
         map.put(FarmersModel.KEY_ITEM_NAME,preferanceManager.getString(FarmersModel.KEY_ITEM_NAME));
         map.put(FarmersModel.TOTAL_ORDER_AMOUNT,preferanceManager.getString(FarmersModel.TOTAL_ORDER_AMOUNT));
-map.put(FarmersModel.ORDER_STATUS,null);
+        map.put(FarmersModel.ORDER_STATUS,null);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).add(map).addOnCompleteListener(task -> {
@@ -85,10 +85,9 @@ map.put(FarmersModel.ORDER_STATUS,null);
                 preferanceManager.putString(FarmersModel.ORDERID,task.getResult().getId());
                 map.put(FarmersModel.ORDER_STATUS,String.valueOf(1));
                 firebaseFirestore.collection(FarmersModel.KEY_ORDER_COLLECTION).document(task.getResult().getId())
-                         .update(map);
-                Intent intent=new Intent(getApplicationContext(),MenuActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                        .update(map);
+                onBackPressed();
+
             }
 
 
@@ -105,20 +104,28 @@ map.put(FarmersModel.ORDER_STATUS,null);
 
         binding.itemQuantity.setText(preferanceManager.getString(FarmersModel.ORDER_QUANTITY)+" TON");
         binding.itemMenu.setText(preferanceManager.getString(FarmersModel.KEY_ITEM_NAME));
-       int a= amount(Integer.parseInt(preferanceManager.getString(FarmersModel.ORDER_QUANTITY)));
+        int a= amount(Integer.parseInt(preferanceManager.getString(FarmersModel.ORDER_QUANTITY)));
         binding.itemAmount.setText(String.valueOf(a));
         binding.taxStateAmount.setText(String.valueOf((a*9)/100));
         binding.taxCentralAmount.setText(String.valueOf((a*9)/100));
-binding.totalAmount.setText(String.valueOf(a+2*(a*9)/100));
-preferanceManager.putString(FarmersModel.TOTAL_ORDER_AMOUNT,String.valueOf(a+2*(a*9)/100));
+        binding.totalAmount.setText(String.valueOf(a+2*(a*9)/100));
+        preferanceManager.putString(FarmersModel.TOTAL_ORDER_AMOUNT,String.valueOf(a+2*(a*9)/100));
 
     }
 
     private int amount(int quantity) {
 
-    int price=Integer.parseInt(preferanceManager.getString(FarmersModel.KEY_ITEM_PRICE));
+        int price=Integer.parseInt(preferanceManager.getString(FarmersModel.KEY_ITEM_PRICE));
 
-    return price*quantity;
+        return price*quantity;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(),MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
