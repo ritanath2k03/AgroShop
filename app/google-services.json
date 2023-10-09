@@ -1,41 +1,42 @@
 {
   "project_info": {
-    "project_number": "1042551890964",
-    "project_id": "agroshop-c2029",
-    "storage_bucket": "agroshop-c2029.appspot.com"
+    "project_number": "412178772624",
+    "firebase_url": "https://agroshop-2dcb1-default-rtdb.firebaseio.com",
+    "project_id": "agroshop-2dcb1",
+    "storage_bucket": "agroshop-2dcb1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1042551890964:android:a627ac89f55a23f0dbf301",
+        "mobilesdk_app_id": "1:412178772624:android:119450bae6f842d5e4de15",
         "android_client_info": {
           "package_name": "com.techfest.agroshop02"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1042551890964-japm5rk0dtlon43qbtc81fug1gbe0u84.apps.googleusercontent.com",
+          "client_id": "412178772624-3khlfgtcu5op3g1vc6eunp91pvjjnmq3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.techfest.agroshop02",
-            "certificate_hash": "0849b3442ee87034d6f65e7090e17817b0c17f8c"
+            "certificate_hash": "01742d5a8ce3a62c573bdaae7a265623f1670698"
           }
         },
         {
-          "client_id": "1042551890964-mb82f9fupbdt00jj1b2mqeks0v99gk90.apps.googleusercontent.com",
+          "client_id": "412178772624-0keto5m5846n0vnnnc61rr3bjoh85co9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAmv2mMpGm_edvtFR51nGyUlveT993H1rY"
+          "current_key": "AIzaSyBSFSZlE_Neuz1W8Fk_0vHRL2al9z6rZXs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1042551890964-mb82f9fupbdt00jj1b2mqeks0v99gk90.apps.googleusercontent.com",
+              "client_id": "412178772624-0keto5m5846n0vnnnc61rr3bjoh85co9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

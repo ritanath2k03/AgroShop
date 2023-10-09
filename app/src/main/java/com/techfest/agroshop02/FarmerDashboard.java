@@ -147,6 +147,7 @@ PreferanceManager preferanceManager;
     }
 
     private void getDashboardData() {
+        HashMap<String,Object> map=new HashMap<>();
         loading(true);
         binding.addButton.setVisibility(View.INVISIBLE);
         String currentUser =preferanceManager.getString(FarmersModel.KEY_USERID);

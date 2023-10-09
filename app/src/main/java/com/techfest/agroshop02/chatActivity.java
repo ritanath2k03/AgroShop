@@ -135,6 +135,7 @@ listenmessages();
                 if(preferanceManager.getString(FarmersModel.KEY_FNAME)!=null){
                     data.put(FarmersModel.KEY_FNAME, preferanceManager.getString(FarmersModel.KEY_FNAME));
                 }
+
                 if(preferanceManager.getString(FarmersModel.KEY_CNAME)!=null){
                     data.put(FarmersModel.KEY_CNAME, preferanceManager.getString(FarmersModel.KEY_CNAME));
                 }
@@ -153,7 +154,7 @@ listenmessages();
 
             }catch (Exception exception) {
 
-                showToast(exception.getMessage());
+//                showToast(exception.getMessage());
             }
         }
         activityChatBinding.editText.setText(null);
