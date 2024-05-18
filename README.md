@@ -1,7 +1,5 @@
 # Agro Shop
 
-## Project Name
-AgroShop
 
 ## Project Description
 Agro Shop is an online android mobile application for buying and selling agricultural products. It connects farmers and buyers, providing a convenient marketplace for agricultural transactions.
