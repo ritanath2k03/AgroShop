@@ -10,29 +10,27 @@ Agro Shop is an online android mobile application for buying and selling agricul
 # Agro Shop
 
 ## Login/Signup
-![Login/Signup]
-(![signup](https://github.com/ritanath2k03/AgroShop/assets/102875024/6e291ef0-e196-4ecf-8306-135ff2ca8ead)
-![login](https://github.com/ritanath2k03/AgroShop/assets/102875024/d63658be-ba3f-45d3-a16b-ee7b40fde92c)
-)
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/6e291ef0-e196-4ecf-8306-135ff2ca8ead" alt="Login/Signup" width="300" height="200">
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/d63658be-ba3f-45d3-a16b-ee7b40fde92c" alt="Login/Signup" width="300" height="200">
+
 ## Dashboard
-![Dashboard](![dashboard](https://github.com/ritanath2k03/AgroShop/assets/102875024/5f3ee31b-af1a-49e6-a854-88c861ef32b6)
-)
+
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/5f3ee31b-af1a-49e6-a854-88c861ef32b6" alt="Login/Signup" width="300" height="200">
 ## Chat
-![Chat](![chat](https://github.com/ritanath2k03/AgroShop/assets/102875024/4070fb6e-f574-4b1f-b22d-55e3e03c120a)
-![allcat](https://github.com/ritanath2k03/AgroShop/assets/102875024/14ae58c6-8a91-4f89-97d4-4e1e8ac992d0)
-)
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/4070fb6e-f574-4b1f-b22d-55e3e03c120a" alt="Login/Signup" width="300" height="200">
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/14ae58c6-8a91-4f89-97d4-4e1e8ac992d0" alt="Login/Signup" width="300" height="200">
+
 
 ## Menu List
-![Menu List](![menu with details](https://github.com/ritanath2k03/AgroShop/assets/102875024/24905531-6477-4bbd-b075-c50428e154e9)
-)
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/24905531-6477-4bbd-b075-c50428e154e9" alt="Login/Signup" width="300" height="200">
+
 
 ## Update Profile
-![Update Profile](![update](https://github.com/ritanath2k03/AgroShop/assets/102875024/1c94d8df-bf50-4d75-9e79-c71bf283ffc0)
-)
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/1c94d8df-bf50-4d75-9e79-c71bf283ffc0" alt="Login/Signup" width="300" height="200">
 
 ## Dispatchable Product
-![Dispatchable Product](![dispatchimage](https://github.com/ritanath2k03/AgroShop/assets/102875024/0cba78f3-78aa-4f63-bab7-a2780c5fb079)
-)
+<img src="https://github.com/ritanath2k03/AgroShop/assets/102875024/0cba78f3-78aa-4f63-bab7-a2780c5fb079" alt="Login/Signup" width="300" height="200">
+
 
 
 ## Project Tech Stack
